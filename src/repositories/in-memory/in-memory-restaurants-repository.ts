@@ -22,4 +22,10 @@ export class InMemoryRestaurantsRepository  implements RestaurantsRepository {
   async list() {
     return this.restaurants;
   }
+
+  async getById(id: string) {
+    const restaurant = this.restaurants.find(restaurant => restaurant.id === id) ?? null;
+
+    return restaurant;
+  }
 }
