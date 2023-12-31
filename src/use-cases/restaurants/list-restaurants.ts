@@ -5,7 +5,7 @@ type ListRestaurantsUseCaseResponse = {
   restaurants: Restaurant[] 
 }
 
-export class ListRestaurantUseCase {
+export class ListRestaurantsUseCase {
   constructor(private restaurantsRepository: RestaurantsRepository) {}
 
   async execute(): Promise<ListRestaurantsUseCaseResponse> {
