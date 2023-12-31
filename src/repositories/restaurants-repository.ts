@@ -1,5 +1,6 @@
-import { CreateRestaurantInput } from "@/types/repositories/restaurants-repository";
+import { CreateRestaurantInput, Restaurant } from "@/types/repositories/restaurants-repository";
 
 export interface RestaurantsRepository {
-  create(body: CreateRestaurantInput): Promise<void>
+  create(body: CreateRestaurantInput): Promise<void>;
+  list(): Promise<Restaurant[]>;
 }
