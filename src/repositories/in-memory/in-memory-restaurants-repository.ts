@@ -18,4 +18,8 @@ export class InMemoryRestaurantsRepository  implements RestaurantsRepository {
 
     this.restaurants.push(restaurant);
   }
+
+  async list() {
+    return this.restaurants;
+  }
 }
