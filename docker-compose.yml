@@ -9,3 +9,5 @@ services:
       - POSTGRESQL_USERNAME=goomer
       - POSTGRESQL_PASSWORD=goomer123
       - POSTGRESQL_DATABASE=goomer-lista-rango-db
+    volumes:
+      - ./src/database/init.sql:/docker-entrypoint-initdb.d/init.sql
