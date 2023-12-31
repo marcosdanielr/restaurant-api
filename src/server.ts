@@ -1,6 +1,5 @@
-import { env } from './env';
 import { app } from './app';
-import 'config/eslint';
+import { env } from './env';
 
 app
   .listen({ 
