@@ -6,7 +6,7 @@ type GetRestaurantUseCaseRequest = {
 }
 
 type GetRestaurantUseCaseResponse = {
-  restaurant: Restaurant
+  restaurant: Restaurant | null
 }
 
 export class GetRestaurantUseCase {
