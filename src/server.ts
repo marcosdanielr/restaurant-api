@@ -1,9 +1,11 @@
 import { app } from './app';
-
-const PORT = 4000;
+import { env } from './env'; 
 
 app
-  .listen({ port: PORT })
+  .listen({ 
+    host: '0.0.0.0',
+    port: env.PORT
+  })
   .then(() => {
-    console.log(`HTTP Server Running on Port ${PORT}`);
+    console.log(`HTTP Server Running on Port ${env.PORT}`);
   });
