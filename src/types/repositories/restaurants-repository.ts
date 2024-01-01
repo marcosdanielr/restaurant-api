@@ -12,3 +12,9 @@ export type CreateRestaurantInput = {
   image_path?: string;
   address: string;
 } 
+
+export type UpdateRestaurantInput = {
+  name?: string;
+  image_?: string;
+  address?: string;
+}
