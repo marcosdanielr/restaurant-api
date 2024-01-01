@@ -28,4 +28,12 @@ export class InMemoryRestaurantsRepository  implements RestaurantsRepository {
 
     return restaurant;
   }
+
+  async deleteById(id: string) {
+    const index = this.restaurants.findIndex(restaurant => restaurant.id === id);
+
+    if (index > 0) {
+      this.restaurants.splice(index, 1);
+    }
+  }
 }
