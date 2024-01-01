@@ -1,5 +1,5 @@
 import { RestaurantsRepository } from "@/repositories/restaurants-repository";
-import { CreateRestaurantInput, Restaurant } from "@/types/repositories/restaurants-repository";
+import { CreateRestaurantInput, Restaurant, UpdateRestaurantInput } from "@/types/repositories/restaurants-repository";
 import { randomUUID } from "node:crypto";
 
 export class InMemoryRestaurantsRepository  implements RestaurantsRepository {
@@ -34,6 +34,19 @@ export class InMemoryRestaurantsRepository  implements RestaurantsRepository {
 
     if (index >= 0) {
       this.restaurants.splice(index, 1);
+    }
+  }
+
+  async update(id: string, body: UpdateRestaurantInput) {
+    const index = this.restaurants.findIndex(restaurant => restaurant.id === id);
+
+    if (index > 0) {
+      this.restaurants[index] = {
+        ...this.restaurants[index],
+        ...body,
+        created_at: this.restaurants[index].created_at,
+        updated_at: new Date(),
+      };
     }
   }
 }
