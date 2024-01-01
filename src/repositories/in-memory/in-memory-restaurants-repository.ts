@@ -40,7 +40,7 @@ export class InMemoryRestaurantsRepository  implements RestaurantsRepository {
   async update(id: string, body: UpdateRestaurantInput) {
     const index = this.restaurants.findIndex(restaurant => restaurant.id === id);
 
-    if (index > 0) {
+    if (index >= 0) {
       this.restaurants[index] = {
         ...this.restaurants[index],
         ...body,
