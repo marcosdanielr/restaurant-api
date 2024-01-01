@@ -15,6 +15,6 @@ export type CreateRestaurantInput = {
 
 export type UpdateRestaurantInput = {
   name?: string;
-  image_?: string;
+  image_path?: string;
   address?: string;
 }
