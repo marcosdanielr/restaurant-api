@@ -1,6 +1,6 @@
 import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { describe, it, expect, beforeEach } from "vitest";
-import { GetRestaurantUseCase } from "./get-restaurant-use-case";
+import { GetRestaurantUseCase } from "./get-restaurant";
 
 let restaurantsRepository: InMemoryRestaurantsRepository;
 let sut: GetRestaurantUseCase;
