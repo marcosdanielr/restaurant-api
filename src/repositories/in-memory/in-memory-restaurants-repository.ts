@@ -32,7 +32,7 @@ export class InMemoryRestaurantsRepository  implements RestaurantsRepository {
   async deleteById(id: string) {
     const index = this.restaurants.findIndex(restaurant => restaurant.id === id);
 
-    if (index > 0) {
+    if (index >= 0) {
       this.restaurants.splice(index, 1);
     }
   }
