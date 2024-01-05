@@ -28,4 +28,13 @@ export class InMemoryProductsRepository implements ProductsRepository {
 
     return products;
   }
+
+  async delete(restaurant_id: string, id: string) {
+    const index = this.products.findIndex(product => product.restaurant_id === restaurant_id && product.id === id);
+
+    if (index >= 0) {
+      this.products.splice(index, 1);
+    }
+      
+  }
 }
