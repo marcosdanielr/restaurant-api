@@ -8,7 +8,7 @@ import { randomUUID } from "crypto";
 export class InMemoryProductsRepository implements ProductsRepository {
   public products: Product[] = [];
 
-  async create(restaurant_id: string, body: CreateProductInput): Promise<void> {
+  async create(restaurant_id: string, body: CreateProductInput) {
     const product = {
       id: randomUUID(),
       restaurant_id,
@@ -21,5 +21,11 @@ export class InMemoryProductsRepository implements ProductsRepository {
     };
 
     this.products.push(product);
+  }
+
+  async listRestaurantProducts(restaurant_id: string) {
+    const products = this.products.filter(product => product.restaurant_id === restaurant_id); 
+
+    return products;
   }
 }
