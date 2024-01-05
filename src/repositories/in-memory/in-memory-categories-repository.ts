@@ -5,7 +5,7 @@ import { randomUUID } from "crypto";
 export class InMemoryCategoriesRepository  implements CategoriesRepository {
   public categories: Category[] = []; 
 
-  async create(restaurant_id: string, body: CategoryInput): Promise<void> {
+  async create(restaurant_id: string, body: CategoryInput) {
    
     const category = {
       id: randomUUID(),
