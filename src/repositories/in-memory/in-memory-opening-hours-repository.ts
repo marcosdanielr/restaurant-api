@@ -23,4 +23,10 @@ export class InMemoryOpeningHoursRepository implements OpeningHoursRepository {
 
     return openingHour;
   }
+
+  async list(restaurant_id: string) {
+    const openingHours = this.openingHours.filter(item => item.restaurant_id === restaurant_id);
+
+    return openingHours;
+  }
 }
