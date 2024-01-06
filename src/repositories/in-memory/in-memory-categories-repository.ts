@@ -1,5 +1,5 @@
 import { CategoriesRepository } from "../categories-repository";
-import { Category, CategoryInput } from "@/types/categories/categories-repository";
+import { Category, CategoryInput } from "@/types/repositories/categories-repository";
 import { randomUUID } from "crypto";
 
 export class InMemoryCategoriesRepository  implements CategoriesRepository {

@@ -1,5 +1,5 @@
 import { CategoriesRepository } from "@/repositories/categories-repository";
-import { CategoryInput } from "@/types/categories/categories-repository";
+import { CategoryInput } from "@/types/repositories/categories-repository";
 
 type CreateCategoryUseCaseRequest = {
   restaurant_id: string;

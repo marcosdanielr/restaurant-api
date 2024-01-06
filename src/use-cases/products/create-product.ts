@@ -1,5 +1,5 @@
 import { ProductsRepository } from "@/repositories/products-repository";
-import { CreateProductInput } from "@/types/products/products-repository";
+import { CreateProductInput } from "@/types/repositories/products-repository";
 
 type CreateProductUseCaseRequest = {
   restaurant_id: string;

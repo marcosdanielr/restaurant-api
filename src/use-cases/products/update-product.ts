@@ -1,5 +1,5 @@
 import { ProductsRepository } from "@/repositories/products-repository";
-import { UpdateProductInput } from "@/types/products/products-repository";
+import { UpdateProductInput } from "@/types/repositories/products-repository";
 
 type UpdateProductUseCaseRequest = {
   restaurant_id: string;

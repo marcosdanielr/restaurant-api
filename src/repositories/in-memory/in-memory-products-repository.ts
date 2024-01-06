@@ -3,7 +3,7 @@ import {
   Product,
   CreateProductInput,
   UpdateProductInput,
-} from "@/types/products/products-repository";
+} from "@/types/repositories/products-repository";
 import { randomUUID } from "crypto";
 
 export class InMemoryProductsRepository implements ProductsRepository {

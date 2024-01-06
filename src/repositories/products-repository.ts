@@ -1,4 +1,4 @@
-import { CreateProductInput, Product, UpdateProductInput } from "@/types/products/products-repository";
+import { CreateProductInput, Product, UpdateProductInput } from "@/types/repositories/products-repository";
 
 export interface ProductsRepository {
   create(restaurant_id: string, body: CreateProductInput): Promise<void>;

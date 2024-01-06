@@ -1,5 +1,5 @@
 import { ProductsRepository } from "@/repositories/products-repository";
-import { Product } from "@/types/products/products-repository";
+import { Product } from "@/types/repositories/products-repository";
 
 type ListRestaurantProductsUseCaseRequest = {
   restaurant_id: string;
