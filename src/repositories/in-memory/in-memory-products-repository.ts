@@ -2,6 +2,7 @@ import { ProductsRepository } from "../products-repository";
 import {
   Product,
   CreateProductInput,
+  UpdateProductInput,
 } from "@/types/products/products-repository";
 import { randomUUID } from "crypto";
 
@@ -36,5 +37,18 @@ export class InMemoryProductsRepository implements ProductsRepository {
       this.products.splice(index, 1);
     }
       
+  }
+
+  async update(restaurant_id: string, id: string, body: UpdateProductInput) {
+    const index = this.products.findIndex(product => product.restaurant_id === restaurant_id && product.id === id);
+
+    if (index >= 0) {
+      this.products[index] = {
+        ...this.products[index],
+        ...body,
+        created_at: this.products[index].created_at,
+        updated_at: new Date(),
+      };
+    }
   }
 }
