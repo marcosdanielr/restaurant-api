@@ -1,4 +1,3 @@
-
 import { describe, it, expect, beforeEach } from "vitest";
 import { ListOpeningHoursUseCase } from "./list-opening-hours";
 import { InMemoryOpeningHoursRepository } from "@/repositories/in-memory/in-memory-opening-hours-repository";
