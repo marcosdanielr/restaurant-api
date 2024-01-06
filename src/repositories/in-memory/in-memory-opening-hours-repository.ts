@@ -16,10 +16,11 @@ export class InMemoryOpeningHoursRepository implements OpeningHoursRepository {
     };
 
     this.openingHours.push(openingHour);
-
   }
 
   async getByWeekday(restaurant_id: string, weekday: Weekday) {
-    return null;
+    const openingHour = this.openingHours.find(item => item.restaurant_id === restaurant_id && item.weekday === weekday) ?? null;
+
+    return openingHour;
   }
 }
