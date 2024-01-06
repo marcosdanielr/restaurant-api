@@ -2,6 +2,7 @@ import { OpeningHoursRepository } from "@/repositories/opening-hours-repository"
 import { OpeningHours } from "@/types/repositories/opening-hours-repository";
 import { InvalidWeekdayError } from "../errors/invalid-weekday-error";
 import { WeekdaysEnum } from "@/constants/weekdays-enum";
+import { WeekdayAlreadyExistsError } from "../errors/weekday-already-exists-error";
 
 export class CreateOpeningHoursUseCase {
   constructor(private openingHoursRepository: OpeningHoursRepository) {}
@@ -25,7 +26,7 @@ export class CreateOpeningHoursUseCase {
     ); 
 
     if (openingHoursExists) {
-      throw new InvalidWeekdayError();
+      throw new WeekdayAlreadyExistsError();
     }
 
     await this.openingHoursRepository.create({

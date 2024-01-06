@@ -3,6 +3,7 @@ import { CreateOpeningHoursUseCase } from "./create-opening-hours";
 import { InMemoryOpeningHoursRepository } from "@/repositories/in-memory/in-memory-opening-hours-repository";
 import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { InvalidWeekdayError } from "../errors/invalid-weekday-error";
+import { WeekdayAlreadyExistsError } from "../errors/weekday-already-exists-error";
 
 let restaurantsRepository: InMemoryRestaurantsRepository;
 let openingHoursRepository: InMemoryOpeningHoursRepository;
@@ -70,7 +71,6 @@ describe("Create Opening Hours Use Case", () => {
 
     const { id: restaurant_id } = restaurantsRepository.restaurants[0];
 
-
     await sut.execute({
       restaurant_id,
       weekday: "SUNDAY",
@@ -85,6 +85,6 @@ describe("Create Opening Hours Use Case", () => {
         start_hour: "08:10",
         final_hour: "18:00"
       })
-    ).rejects.toBeInstanceOf(InvalidWeekdayError);
+    ).rejects.toBeInstanceOf(WeekdayAlreadyExistsError);
   });
 });
