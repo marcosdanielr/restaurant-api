@@ -4,6 +4,7 @@ import { InMemoryOpeningHoursRepository } from "@/repositories/in-memory/in-memo
 import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { InvalidWeekdayError } from "../errors/invalid-weekday-error";
 import { WeekdayAlreadyExistsError } from "../errors/weekday-already-exists-error";
+import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
 
 let restaurantsRepository: InMemoryRestaurantsRepository;
 let openingHoursRepository: InMemoryOpeningHoursRepository;
@@ -87,4 +88,24 @@ describe("Create Opening Hours Use Case", () => {
       })
     ).rejects.toBeInstanceOf(WeekdayAlreadyExistsError);
   });
+
+
+  it("shouldn't able to create opening hours if time format be different than HH:mm", async () => {
+    await restaurantsRepository.create({
+      name: "Lanchonete",
+      address: "Avenida",
+    });
+
+    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
+
+    await expect(() => 
+      sut.execute({
+        restaurant_id,
+        weekday: "SUNDAY",
+        start_hour: "11:10",
+        final_hour: "18h00"
+      })
+    ).rejects.toBeInstanceOf(InvalidTimeFormatError);
+  });
+
 });
