@@ -2,6 +2,6 @@ import { OpeningHours, Weekday } from "@/types/repositories/opening-hours-reposi
 
 export interface OpeningHoursRepository {
   create(body: OpeningHours): Promise<void>;
-  list(restaurant_id: string): Promise<OpeningHoursRepository[]>
-  getByWeekday(restaurant_id: string, weekday: Weekday): Promise<OpeningHoursRepository | null>
+  list(restaurant_id: string): Promise<OpeningHours[]>
+  getByWeekday(restaurant_id: string, weekday: Weekday): Promise<OpeningHours | null>
 }
