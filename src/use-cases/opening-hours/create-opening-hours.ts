@@ -3,6 +3,8 @@ import { OpeningHours } from "@/types/repositories/opening-hours-repository";
 import { InvalidWeekdayError } from "../errors/invalid-weekday-error";
 import { WeekdaysEnum } from "@/constants/weekdays-enum";
 import { WeekdayAlreadyExistsError } from "../errors/weekday-already-exists-error";
+import { validateTimeFormat } from "@/utils/validate-hour-format";
+import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
 
 export class CreateOpeningHoursUseCase {
   constructor(private openingHoursRepository: OpeningHoursRepository) {}
@@ -13,6 +15,12 @@ export class CreateOpeningHoursUseCase {
     start_hour,
     final_hour,
   }: OpeningHours): Promise<void> {
+
+    const isNotValidHour = !validateTimeFormat(start_hour) || !validateTimeFormat(final_hour);
+
+    if (isNotValidHour) {
+      throw new InvalidTimeFormatError();
+    }
 
     const isValidWeekDay = WeekdaysEnum[weekday];
 
