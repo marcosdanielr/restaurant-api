@@ -60,4 +60,31 @@ describe("Create Opening Hours Use Case", () => {
       })
     ).rejects.toBeInstanceOf(InvalidWeekdayError);
   });
+
+
+  it("shouldn't able to create opening hours if already exists", async () => {
+    await restaurantsRepository.create({
+      name: "Lanchonete",
+      address: "Avenida",
+    });
+
+    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
+
+
+    await sut.execute({
+      restaurant_id,
+      weekday: "SUNDAY",
+      start_hour: "05:10",
+      final_hour: "16:00"
+    });
+
+    await expect(() => 
+      sut.execute({
+        restaurant_id,
+        weekday: "SUNDAY",
+        start_hour: "08:10",
+        final_hour: "18:00"
+      })
+    ).rejects.toBeInstanceOf(InvalidWeekdayError);
+  });
 });
