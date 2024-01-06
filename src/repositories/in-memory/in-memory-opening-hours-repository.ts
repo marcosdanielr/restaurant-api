@@ -6,13 +6,13 @@ export class InMemoryOpeningHoursRepository implements OpeningHoursRepository {
   public openingHours: OpeningHours[] = []; 
 
   async create(body: OpeningHours) {
-    const { restaurant_id, weekday, start_hour, final_hour } = body;
+    const { restaurant_id, weekday, start_time, end_time } = body;
 
     const openingHour = {
       restaurant_id, 
       weekday, 
-      start_hour, 
-      final_hour
+      start_time, 
+      end_time
     };
 
     this.openingHours.push(openingHour);

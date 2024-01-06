@@ -29,8 +29,8 @@ describe("Create Opening Hours Use Case", () => {
     await sut.execute({
       restaurant_id,
       weekday: "SUNDAY",
-      start_hour: "08:10",
-      final_hour: "18:00"
+      start_time: "08:10",
+      end_time: "18:00"
     });
 
     const openingHours = openingHoursRepository.openingHours;
@@ -39,8 +39,8 @@ describe("Create Opening Hours Use Case", () => {
       expect.objectContaining({
         restaurant_id,
         weekday: "SUNDAY",
-        start_hour: "08:10",
-        final_hour: "18:00"
+        start_time: "08:10",
+        end_time: "18:00"
       })
     );
   });
@@ -57,8 +57,8 @@ describe("Create Opening Hours Use Case", () => {
       sut.execute({
         restaurant_id,
         weekday: "TEST" as any,
-        start_hour: "08:10",
-        final_hour: "18:00"
+        start_time: "08:10",
+        end_time: "18:00"
       })
     ).rejects.toBeInstanceOf(InvalidWeekdayError);
   });
@@ -75,16 +75,16 @@ describe("Create Opening Hours Use Case", () => {
     await sut.execute({
       restaurant_id,
       weekday: "SUNDAY",
-      start_hour: "05:10",
-      final_hour: "16:00"
+      start_time: "05:10",
+      end_time: "16:00"
     });
 
     await expect(() => 
       sut.execute({
         restaurant_id,
         weekday: "SUNDAY",
-        start_hour: "08:10",
-        final_hour: "18:00"
+        start_time: "08:10",
+        end_time: "18:00"
       })
     ).rejects.toBeInstanceOf(WeekdayAlreadyExistsError);
   });
@@ -102,8 +102,8 @@ describe("Create Opening Hours Use Case", () => {
       sut.execute({
         restaurant_id,
         weekday: "SUNDAY",
-        start_hour: "11:10",
-        final_hour: "18h00"
+        start_time: "11:10",
+        end_time: "18h00"
       })
     ).rejects.toBeInstanceOf(InvalidTimeFormatError);
   });

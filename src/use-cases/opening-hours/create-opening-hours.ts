@@ -12,11 +12,11 @@ export class CreateOpeningHoursUseCase {
   async execute({
     restaurant_id,
     weekday,
-    start_hour,
-    final_hour,
+    start_time,
+    end_time,
   }: OpeningHours): Promise<void> {
 
-    const isNotValidHour = !validateTimeFormat(start_hour) || !validateTimeFormat(final_hour);
+    const isNotValidHour = !validateTimeFormat(start_time) || !validateTimeFormat(end_time);
 
     if (isNotValidHour) {
       throw new InvalidTimeFormatError();
@@ -40,8 +40,8 @@ export class CreateOpeningHoursUseCase {
     await this.openingHoursRepository.create({
       restaurant_id,
       weekday,
-      start_hour,
-      final_hour,
+      start_time,
+      end_time,
     });
   }
 }

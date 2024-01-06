@@ -26,16 +26,16 @@ describe("List Opening Hours Use Case", () => {
     await openingHoursRepository.create({
       restaurant_id,
       weekday: "FRIDAY",
-      start_hour: "06:00",
-      final_hour: "12:00",
+      start_time: "06:00",
+      end_time: "12:00",
     });
 
 
     await openingHoursRepository.create({
       restaurant_id,
       weekday: "MONDAY",
-      start_hour: "06:00",
-      final_hour: "12:00",
+      start_time: "06:00",
+      end_time: "12:00",
     });
 
     const { openingHours } = await sut.execute({
