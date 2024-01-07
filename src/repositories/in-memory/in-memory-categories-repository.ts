@@ -1,11 +1,11 @@
+import { Category, CategoryRequest } from "@/models/categories-model";
 import { CategoriesRepository } from "../categories-repository";
-import { Category, CategoryInput } from "@/types/repositories/categories-repository";
 import { randomUUID } from "crypto";
 
 export class InMemoryCategoriesRepository  implements CategoriesRepository {
   public categories: Category[] = []; 
 
-  async create(restaurant_id: string, body: CategoryInput) {
+  async create(restaurant_id: string, body: CategoryRequest) {
    
     const category = {
       id: randomUUID(),

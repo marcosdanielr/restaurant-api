@@ -1,9 +1,9 @@
+import { CategoryRequest } from "@/models/categories-model";
 import { CategoriesRepository } from "@/repositories/categories-repository";
-import { CategoryInput } from "@/types/repositories/categories-repository";
 
 type CreateCategoryUseCaseRequest = {
   restaurant_id: string;
-  body: CategoryInput
+  body: CategoryRequest
 }
 
 export class CreateCategoryUseCase {

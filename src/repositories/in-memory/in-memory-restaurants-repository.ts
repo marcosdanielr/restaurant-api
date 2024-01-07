@@ -1,11 +1,12 @@
+import { UpdateProductRequest } from "@/models/products-model";
+import { CreateRestaurantRequest, Restaurant } from "@/models/restaurants-model";
 import { RestaurantsRepository } from "@/repositories/restaurants-repository";
-import { CreateRestaurantInput, Restaurant, UpdateRestaurantInput } from "@/types/repositories/restaurants-repository";
 import { randomUUID } from "node:crypto";
 
 export class InMemoryRestaurantsRepository  implements RestaurantsRepository {
   public restaurants: Restaurant[] = []; 
 
-  async create(body: CreateRestaurantInput) {
+  async create(body: CreateRestaurantRequest) {
 
     const restaurant = {
       id: randomUUID(),
@@ -37,7 +38,7 @@ export class InMemoryRestaurantsRepository  implements RestaurantsRepository {
     }
   }
 
-  async update(id: string, body: UpdateRestaurantInput) {
+  async update(id: string, body: UpdateProductRequest) {
     const index = this.restaurants.findIndex(restaurant => restaurant.id === id);
 
     if (index >= 0) {

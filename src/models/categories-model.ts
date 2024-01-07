@@ -6,6 +6,6 @@ export type Category = {
   updated_at: Date;
 }
 
-export type CategoryInput = {
+export type CategoryRequest = {
   name: string;
 }

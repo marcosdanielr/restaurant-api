@@ -1,10 +1,10 @@
+import { UpdateProductRequest } from "@/models/products-model";
 import { ProductsRepository } from "@/repositories/products-repository";
-import { UpdateProductInput } from "@/types/repositories/products-repository";
 
 type UpdateProductUseCaseRequest = {
   restaurant_id: string;
   id: string;
-  body: UpdateProductInput
+  body: UpdateProductRequest
 };
 
 export class UpdateProductUseCase {

@@ -1,15 +1,12 @@
+import { CreateProductRequest, Product, UpdateProductRequest } from "@/models/products-model";
 import { ProductsRepository } from "../products-repository";
-import {
-  Product,
-  CreateProductInput,
-  UpdateProductInput,
-} from "@/types/repositories/products-repository";
+
 import { randomUUID } from "crypto";
 
 export class InMemoryProductsRepository implements ProductsRepository {
   public products: Product[] = [];
 
-  async create(restaurant_id: string, body: CreateProductInput) {
+  async create(restaurant_id: string, body: CreateProductRequest) {
     const product = {
       id: randomUUID(),
       restaurant_id,
@@ -39,7 +36,7 @@ export class InMemoryProductsRepository implements ProductsRepository {
       
   }
 
-  async update(restaurant_id: string, id: string, body: UpdateProductInput) {
+  async update(restaurant_id: string, id: string, body: UpdateProductRequest) {
     const index = this.products.findIndex(product => product.restaurant_id === restaurant_id && product.id === id);
 
     if (index >= 0) {

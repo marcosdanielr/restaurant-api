@@ -1,5 +1,6 @@
-import { OpeningHours, Weekday } from "@/types/repositories/opening-hours-repository";
+import { OpeningHours } from "@/models/opening-hours-model";
 import { OpeningHoursRepository } from "../opening-hours-repository";
+import { Weekday } from "@/types/weekday";
 
 
 export class InMemoryOpeningHoursRepository implements OpeningHoursRepository {

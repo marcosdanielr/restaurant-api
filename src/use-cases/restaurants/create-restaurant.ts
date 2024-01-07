@@ -1,5 +1,5 @@
+import { CreateRestaurantRequest } from "@/models/restaurants-model";
 import { RestaurantsRepository } from "@/repositories/restaurants-repository";
-import { CreateRestaurantInput } from "@/types/repositories/restaurants-repository";
 
 export class CreateRestaurantUseCase {
   constructor(private restaurantsRepository: RestaurantsRepository) {}
@@ -8,7 +8,7 @@ export class CreateRestaurantUseCase {
     name,
     image_path,
     address
-  }: CreateRestaurantInput): Promise<void> {
+  }: CreateRestaurantRequest): Promise<void> {
 
     await this.restaurantsRepository.create({
       name,

@@ -1,8 +1,8 @@
-import { CreateProductInput, Product, UpdateProductInput } from "@/types/repositories/products-repository";
+import { CreateProductRequest, Product, UpdateProductRequest } from "@/models/products-model";
 
 export interface ProductsRepository {
-  create(restaurant_id: string, body: CreateProductInput): Promise<void>;
+  create(restaurant_id: string, body: CreateProductRequest): Promise<void>;
   listRestaurantProducts(restaurant_id: string): Promise<Product[]>;
   delete(restaurant_id: string, id: string): Promise<void>;
-  update(restaurant_id: string, id: string, body: UpdateProductInput): Promise<void>;
+  update(restaurant_id: string, id: string, body: UpdateProductRequest): Promise<void>;
 }

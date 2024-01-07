@@ -1,9 +1,9 @@
+import { CreateProductRequest } from "@/models/products-model";
 import { ProductsRepository } from "@/repositories/products-repository";
-import { CreateProductInput } from "@/types/repositories/products-repository";
 
 type CreateProductUseCaseRequest = {
   restaurant_id: string;
-  body: CreateProductInput;
+  body: CreateProductRequest;
 };
 
 export class CreateProductUseCase {

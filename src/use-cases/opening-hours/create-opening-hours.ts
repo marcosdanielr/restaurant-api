@@ -1,5 +1,5 @@
 import { OpeningHoursRepository } from "@/repositories/opening-hours-repository";
-import { OpeningHours } from "@/types/repositories/opening-hours-repository";
+import { OpeningHours as OpeningHoursRequest } from "@/models/opening-hours-model";
 import { InvalidWeekdayError } from "../errors/invalid-weekday-error";
 import { WeekdaysEnum } from "@/constants/weekdays-enum";
 import { WeekdayAlreadyExistsError } from "../errors/weekday-already-exists-error";
@@ -18,7 +18,7 @@ export class CreateOpeningHoursUseCase {
     weekday,
     start_time,
     end_time,
-  }: OpeningHours): Promise<void> {
+  }: OpeningHoursRequest): Promise<void> {
 
     const isNotValidHour = !validateTimeFormat(start_time) || !validateTimeFormat(end_time);
     

@@ -1,9 +1,9 @@
 import { RestaurantsRepository } from "@/repositories/restaurants-repository";
-import { UpdateRestaurantInput } from "@/types/repositories/restaurants-repository";
+import { UpdateRestaurantRequest } from "@/models/restaurants-model";
 
 type UpdateRestaurantUseCaseRequest = {
   id: string;
-  body: UpdateRestaurantInput;
+  body: UpdateRestaurantRequest;
 }
 
 export class UpdateRestaurantUseCase {

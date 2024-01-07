@@ -1,4 +1,4 @@
-import { Weekday } from "../weekday";
+import { Weekday } from "../types/weekday";
 
 export type Promotion = {
   product_id: string;

@@ -1,4 +1,4 @@
-import { OpeningHours } from "@/types/repositories/opening-hours-repository";
+import { OpeningHours } from "@/models/opening-hours-model";
 import { Weekday } from "@/types/weekday";
 
 export interface OpeningHoursRepository {

@@ -1,5 +1,5 @@
+import { Product } from "@/models/products-model";
 import { ProductsRepository } from "@/repositories/products-repository";
-import { Product } from "@/types/repositories/products-repository";
 
 type ListRestaurantProductsUseCaseRequest = {
   restaurant_id: string;

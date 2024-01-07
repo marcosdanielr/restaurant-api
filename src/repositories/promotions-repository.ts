@@ -1,4 +1,4 @@
-import { Promotion } from "@/types/repositories/promotions-repository";
+import { Promotion } from "@/models/promotions-model";
 
 export interface PromotionsRepository {
   create(body: Promotion): Promise<void>;

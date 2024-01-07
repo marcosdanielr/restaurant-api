@@ -1,5 +1,5 @@
+import { Promotion as PromotionRequest } from "@/models/promotions-model";
 import { PromotionsRepository } from "@/repositories/promotions-repository";
-import { Promotion } from "@/types/repositories/promotions-repository";
 
 export class CreatePromotionUseCase {
   constructor(private promotionsRepository: PromotionsRepository) {}
@@ -11,7 +11,7 @@ export class CreatePromotionUseCase {
     weekday,
     start_time,
     end_time
-  }: Promotion): Promise<void> {
+  }: PromotionRequest): Promise<void> {
 
     await this.promotionsRepository.create({
       product_id,

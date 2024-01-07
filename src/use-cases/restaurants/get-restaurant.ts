@@ -1,5 +1,5 @@
+import { Restaurant } from "@/models/restaurants-model";
 import { RestaurantsRepository } from "@/repositories/restaurants-repository";
-import { Restaurant } from "@/types/repositories/restaurants-repository";
 
 type GetRestaurantUseCaseRequest = {
   id: string

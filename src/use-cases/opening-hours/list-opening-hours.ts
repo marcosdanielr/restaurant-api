@@ -1,5 +1,5 @@
+import { OpeningHours } from "@/models/opening-hours-model";
 import { OpeningHoursRepository } from "@/repositories/opening-hours-repository";
-import { OpeningHours } from "@/types/repositories/opening-hours-repository";
 
 type ListOpeningHoursUseCaseRequest = {
   restaurant_id: string;
