@@ -1,7 +1,10 @@
+import { Weekday } from "../weekday";
+
 export type Promotion = {
   product_id: string;
   description: string;
   price: number;
-  start_datetime: Date;
-  final_datetime: Date;
+  weekday: Weekday;
+  start_time: string;
+  end_time: string;
 }

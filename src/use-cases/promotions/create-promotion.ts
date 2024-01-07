@@ -8,16 +8,18 @@ export class CreatePromotionUseCase {
     product_id,
     description,
     price, 
-    start_datetime,
-    final_datetime
+    weekday,
+    start_time,
+    end_time
   }: Promotion): Promise<void> {
 
     await this.promotionsRepository.create({
       product_id,
       description,
       price,
-      start_datetime,
-      final_datetime
+      weekday,
+      start_time,
+      end_time,
     });
   }
 }
