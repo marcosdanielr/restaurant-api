@@ -1,4 +1,4 @@
-export type Weekday = "SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY";
+import { Weekday } from "../weekday";
 
 export type OpeningHours = {
   restaurant_id: string;
