@@ -4,6 +4,8 @@ import { PromotionAlreadyExistsError } from "../errors/promotion-already-exists-
 import { isMinimumIntervalInMinutes } from "@/utils/is-minimum-interval-in-minutes";
 import { MINIMUM_INTERVAL_TIME_IN_SECONDS } from "@/constants/minimum-interval-time-in-seconds";
 import { MinimumIntervalTimeError } from "../errors/minimum-interval-time-error";
+import { validateTimeFormat } from "@/utils/validate-hour-format";
+import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
 
 export class CreatePromotionUseCase {
   constructor(private promotionsRepository: IPromotionsRepository) {}
@@ -16,6 +18,11 @@ export class CreatePromotionUseCase {
     start_time,
     end_time
   }: PromotionRequest): Promise<void> {
+    const isNotValidHour = !validateTimeFormat(start_time) || !validateTimeFormat(end_time);
+    
+    if (isNotValidHour) {
+      throw new InvalidTimeFormatError();
+    } 
 
     const promotionExists = await this.promotionsRepository.getByWeekday(product_id, weekday);
 
