@@ -1,8 +1,8 @@
 import { CreateRestaurantRequest } from "@/models/restaurants-model";
-import { RestaurantsRepository } from "@/repositories/restaurants-repository";
+import { IRestaurantsRepository } from "@/repositories/restaurants-repository";
 
 export class CreateRestaurantUseCase {
-  constructor(private restaurantsRepository: RestaurantsRepository) {}
+  constructor(private IRestaurantsRepository: IRestaurantsRepository) {}
 
   async execute({
     name,
@@ -10,7 +10,7 @@ export class CreateRestaurantUseCase {
     address
   }: CreateRestaurantRequest): Promise<void> {
 
-    await this.restaurantsRepository.create({
+    await this.IRestaurantsRepository.create({
       name,
       image_path,
       address

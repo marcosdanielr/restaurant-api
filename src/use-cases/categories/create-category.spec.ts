@@ -1,28 +1,28 @@
-import { InMemoryCategoriesRepository } from "@/repositories/in-memory/in-memory-categories-repository";
+import { InMemoryICategoriesRepository } from "@/repositories/in-memory/in-memory-categories-repository";
 import { describe, it, expect, beforeEach } from "vitest";
 import { CreateCategoryUseCase } from "./create-category";
-import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
+import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 
-let categoriesRepository: InMemoryCategoriesRepository;
-let restaurantsRepository: InMemoryRestaurantsRepository;
+let ICategoriesRepository: InMemoryICategoriesRepository;
+let IRestaurantsRepository: InMemoryIRestaurantsRepository;
 let sut: CreateCategoryUseCase;
 
 describe("Create Category Use Case", () => {
   beforeEach(() => {
-    categoriesRepository = new InMemoryCategoriesRepository();
-    restaurantsRepository = new InMemoryRestaurantsRepository();
+    ICategoriesRepository = new InMemoryICategoriesRepository();
+    IRestaurantsRepository = new InMemoryIRestaurantsRepository();
 
-    sut = new CreateCategoryUseCase(categoriesRepository);
+    sut = new CreateCategoryUseCase(ICategoriesRepository);
   });
 
   it("should be able to create category", async () => {
 
-    await restaurantsRepository.create({
+    await IRestaurantsRepository.create({
       name: "Salgados",
       address: "Avenida"
     });
 
-    const { id: restaurant_id  } = restaurantsRepository.restaurants[0];
+    const { id: restaurant_id  } = IRestaurantsRepository.restaurants[0];
 
     await sut.execute(
       {
@@ -33,7 +33,7 @@ describe("Create Category Use Case", () => {
       }
     );
 
-    const category = categoriesRepository.categories[0];
+    const category = ICategoriesRepository.categories[0];
 
     expect(category).toEqual(
       expect.objectContaining({

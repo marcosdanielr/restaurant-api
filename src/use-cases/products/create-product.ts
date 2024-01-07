@@ -1,5 +1,5 @@
 import { CreateProductRequest } from "@/models/products-model";
-import { ProductsRepository } from "@/repositories/products-repository";
+import { IProductsRepository } from "@/repositories/products-repository";
 
 type CreateProductUseCaseRequest = {
   restaurant_id: string;
@@ -7,12 +7,12 @@ type CreateProductUseCaseRequest = {
 };
 
 export class CreateProductUseCase {
-  constructor(private productsRepository: ProductsRepository) {}
+  constructor(private IProductsRepository: IProductsRepository) {}
 
   async execute({
     restaurant_id,
     body,
   }: CreateProductUseCaseRequest): Promise<void> {
-    await this.productsRepository.create(restaurant_id, body);
+    await this.IProductsRepository.create(restaurant_id, body);
   }
 }

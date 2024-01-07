@@ -1,29 +1,29 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { ListOpeningHoursUseCase } from "./list-opening-hours";
-import { InMemoryOpeningHoursRepository } from "@/repositories/in-memory/in-memory-opening-hours-repository";
-import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
+import { InMemoryIOpeningHoursRepository } from "@/repositories/in-memory/in-memory-opening-hours-repository";
+import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 
-let restaurantsRepository: InMemoryRestaurantsRepository;
-let openingHoursRepository: InMemoryOpeningHoursRepository;
+let IRestaurantsRepository: InMemoryIRestaurantsRepository;
+let IOpeningHoursRepository: InMemoryIOpeningHoursRepository;
 let sut: ListOpeningHoursUseCase;
 
 describe("List Opening Hours Use Case", () => {
   beforeEach(() => {
-    restaurantsRepository = new InMemoryRestaurantsRepository();
-    openingHoursRepository = new InMemoryOpeningHoursRepository();
-    sut = new ListOpeningHoursUseCase(openingHoursRepository);
+    IRestaurantsRepository = new InMemoryIRestaurantsRepository();
+    IOpeningHoursRepository = new InMemoryIOpeningHoursRepository();
+    sut = new ListOpeningHoursUseCase(IOpeningHoursRepository);
   });
 
   it("should be able to list opening hours", async () => {
 
-    await restaurantsRepository.create({
+    await IRestaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
     });
 
-    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
+    const { id: restaurant_id } = IRestaurantsRepository.restaurants[0];
 
-    await openingHoursRepository.create({
+    await IOpeningHoursRepository.create({
       restaurant_id,
       weekday: "FRIDAY",
       start_time: "06:00",
@@ -31,7 +31,7 @@ describe("List Opening Hours Use Case", () => {
     });
 
 
-    await openingHoursRepository.create({
+    await IOpeningHoursRepository.create({
       restaurant_id,
       weekday: "MONDAY",
       start_time: "06:00",

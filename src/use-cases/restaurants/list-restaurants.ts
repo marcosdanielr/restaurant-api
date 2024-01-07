@@ -1,16 +1,16 @@
 import { Restaurant } from "@/models/restaurants-model";
-import { RestaurantsRepository } from "@/repositories/restaurants-repository";
+import { IRestaurantsRepository } from "@/repositories/restaurants-repository";
 
 type ListRestaurantsUseCaseResponse = {
   restaurants: Restaurant[] 
 }
 
 export class ListRestaurantsUseCase {
-  constructor(private restaurantsRepository: RestaurantsRepository) {}
+  constructor(private IRestaurantsRepository: IRestaurantsRepository) {}
 
   async execute(): Promise<ListRestaurantsUseCaseResponse> {
 
-    const restaurants = await this.restaurantsRepository.list();
+    const restaurants = await this.IRestaurantsRepository.list();
 
     return {
       restaurants

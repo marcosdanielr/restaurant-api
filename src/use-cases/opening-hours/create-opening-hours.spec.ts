@@ -1,31 +1,31 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { CreateOpeningHoursUseCase } from "./create-opening-hours";
-import { InMemoryOpeningHoursRepository } from "@/repositories/in-memory/in-memory-opening-hours-repository";
-import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
+import { InMemoryIOpeningHoursRepository } from "@/repositories/in-memory/in-memory-opening-hours-repository";
+import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { InvalidWeekdayError } from "../errors/invalid-weekday-error";
 import { WeekdayAlreadyExistsError } from "../errors/weekday-already-exists-error";
 import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
 import { MinimumIntervalTimeError } from "../errors/minimum-interval-time-error";
 
-let restaurantsRepository: InMemoryRestaurantsRepository;
-let openingHoursRepository: InMemoryOpeningHoursRepository;
+let IRestaurantsRepository: InMemoryIRestaurantsRepository;
+let IOpeningHoursRepository: InMemoryIOpeningHoursRepository;
 let sut: CreateOpeningHoursUseCase;
 
 describe("Create Opening Hours Use Case", () => {
   beforeEach(() => {
-    restaurantsRepository = new InMemoryRestaurantsRepository();
-    openingHoursRepository = new InMemoryOpeningHoursRepository();
-    sut = new CreateOpeningHoursUseCase(openingHoursRepository);
+    IRestaurantsRepository = new InMemoryIRestaurantsRepository();
+    IOpeningHoursRepository = new InMemoryIOpeningHoursRepository();
+    sut = new CreateOpeningHoursUseCase(IOpeningHoursRepository);
   });
 
   it("should be able to create opening hour", async () => {
 
-    await restaurantsRepository.create({
+    await IRestaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
     });
 
-    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
+    const { id: restaurant_id } = IRestaurantsRepository.restaurants[0];
 
     await sut.execute({
       restaurant_id,
@@ -34,7 +34,7 @@ describe("Create Opening Hours Use Case", () => {
       end_time: "18:00"
     });
 
-    const openingHours = openingHoursRepository.openingHours;
+    const openingHours = IOpeningHoursRepository.openingHours;
 
     expect(openingHours[0]).toEqual(
       expect.objectContaining({
@@ -47,12 +47,12 @@ describe("Create Opening Hours Use Case", () => {
   });
 
   it("shouldn't able to create opening hours if has invalid weekday", async () => {
-    await restaurantsRepository.create({
+    await IRestaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
     });
 
-    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
+    const { id: restaurant_id } = IRestaurantsRepository.restaurants[0];
 
     await expect(() => 
       sut.execute({
@@ -66,12 +66,12 @@ describe("Create Opening Hours Use Case", () => {
 
 
   it("shouldn't able to create opening hours if already exists", async () => {
-    await restaurantsRepository.create({
+    await IRestaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
     });
 
-    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
+    const { id: restaurant_id } = IRestaurantsRepository.restaurants[0];
 
     await sut.execute({
       restaurant_id,
@@ -92,12 +92,12 @@ describe("Create Opening Hours Use Case", () => {
 
 
   it("shouldn't able to create opening hours if time format be different than HH:mm", async () => {
-    await restaurantsRepository.create({
+    await IRestaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
     });
 
-    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
+    const { id: restaurant_id } = IRestaurantsRepository.restaurants[0];
 
     await expect(() => 
       sut.execute({
@@ -111,12 +111,12 @@ describe("Create Opening Hours Use Case", () => {
 
 
   it("It shouldn't be possible to create an opening hour if the time interval is not greater than 15 minutes", async () => {
-    await restaurantsRepository.create({
+    await IRestaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
     });
 
-    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
+    const { id: restaurant_id } = IRestaurantsRepository.restaurants[0];
 
     await expect(() => 
       sut.execute({

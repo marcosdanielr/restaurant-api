@@ -1,9 +1,9 @@
 import { OpeningHours } from "@/models/opening-hours-model";
-import { OpeningHoursRepository } from "../opening-hours-repository";
+import { IOpeningHoursRepository } from "../opening-hours-repository";
 import { Weekday } from "@/types/weekday";
 
 
-export class InMemoryOpeningHoursRepository implements OpeningHoursRepository {
+export class InMemoryIOpeningHoursRepository implements IOpeningHoursRepository {
   public openingHours: OpeningHours[] = []; 
 
   async create(body: OpeningHours) {

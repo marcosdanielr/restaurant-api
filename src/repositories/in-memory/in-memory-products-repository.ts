@@ -1,9 +1,9 @@
 import { CreateProductRequest, Product, UpdateProductRequest } from "@/models/products-model";
-import { ProductsRepository } from "../products-repository";
+import { IProductsRepository } from "../products-repository";
 
 import { randomUUID } from "crypto";
 
-export class InMemoryProductsRepository implements ProductsRepository {
+export class InMemoryIProductsRepository implements IProductsRepository {
   public products: Product[] = [];
 
   async create(restaurant_id: string, body: CreateProductRequest) {

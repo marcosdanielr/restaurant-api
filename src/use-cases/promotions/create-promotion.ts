@@ -1,8 +1,8 @@
 import { Promotion as PromotionRequest } from "@/models/promotions-model";
-import { PromotionsRepository } from "@/repositories/promotions-repository";
+import { IPromotionsRepository } from "@/repositories/promotions-repository";
 
 export class CreatePromotionUseCase {
-  constructor(private promotionsRepository: PromotionsRepository) {}
+  constructor(private IPromotionsRepository: IPromotionsRepository) {}
 
   async execute({
     product_id,
@@ -13,7 +13,7 @@ export class CreatePromotionUseCase {
     end_time
   }: PromotionRequest): Promise<void> {
 
-    await this.promotionsRepository.create({
+    await this.IPromotionsRepository.create({
       product_id,
       description,
       price,

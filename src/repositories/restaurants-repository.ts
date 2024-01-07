@@ -1,6 +1,6 @@
 import { CreateRestaurantRequest, Restaurant, UpdateRestaurantRequest } from "@/models/restaurants-model";
 
-export interface RestaurantsRepository {
+export interface IRestaurantsRepository {
   create(body: CreateRestaurantRequest): Promise<void>;
   list(): Promise<Restaurant[]>;
   getById(id: string): Promise<Restaurant | null>;

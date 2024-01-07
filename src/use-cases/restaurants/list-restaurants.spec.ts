@@ -1,25 +1,25 @@
-import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
+import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { describe, it, expect, beforeEach } from "vitest";
 import { ListRestaurantsUseCase } from "./list-restaurants";
 
-let restaurantsRepository: InMemoryRestaurantsRepository;
+let IRestaurantsRepository: InMemoryIRestaurantsRepository;
 let sut: ListRestaurantsUseCase;
 
 describe("List Restaurants Use Case", () => {
   beforeEach(() => {
-    restaurantsRepository = new InMemoryRestaurantsRepository();
-    sut = new ListRestaurantsUseCase(restaurantsRepository);
+    IRestaurantsRepository = new InMemoryIRestaurantsRepository();
+    sut = new ListRestaurantsUseCase(IRestaurantsRepository);
   });
 
   it("should be able to list restaurants", async () => {
 
     await Promise.all(
       [
-        restaurantsRepository.create({
+        IRestaurantsRepository.create({
           name: "Burguer",
           address: "Avenida",
         }),
-        restaurantsRepository.create({
+        IRestaurantsRepository.create({
           name: "Lanchonete",
           address: "Avenida 2",
         })

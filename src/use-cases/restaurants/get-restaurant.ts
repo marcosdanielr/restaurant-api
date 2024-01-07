@@ -1,5 +1,5 @@
 import { Restaurant } from "@/models/restaurants-model";
-import { RestaurantsRepository } from "@/repositories/restaurants-repository";
+import { IRestaurantsRepository } from "@/repositories/restaurants-repository";
 
 type GetRestaurantUseCaseRequest = {
   id: string
@@ -10,13 +10,13 @@ type GetRestaurantUseCaseResponse = {
 }
 
 export class GetRestaurantUseCase {
-  constructor(private restaurantsRepository: RestaurantsRepository) {}
+  constructor(private IRestaurantsRepository: IRestaurantsRepository) {}
 
   async execute({
     id
   }: GetRestaurantUseCaseRequest): Promise<GetRestaurantUseCaseResponse> {
 
-    const restaurant = await this.restaurantsRepository.getById(id);
+    const restaurant = await this.IRestaurantsRepository.getById(id);
 
     return {
       restaurant

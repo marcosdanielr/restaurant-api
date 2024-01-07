@@ -1,4 +1,4 @@
-import { RestaurantsRepository } from "@/repositories/restaurants-repository";
+import { IRestaurantsRepository } from "@/repositories/restaurants-repository";
 import { UpdateRestaurantRequest } from "@/models/restaurants-model";
 
 type UpdateRestaurantUseCaseRequest = {
@@ -7,9 +7,9 @@ type UpdateRestaurantUseCaseRequest = {
 }
 
 export class UpdateRestaurantUseCase {
-  constructor(private restaurantsRepository: RestaurantsRepository) {}
+  constructor(private IRestaurantsRepository: IRestaurantsRepository) {}
 
   async execute({ id, body }: UpdateRestaurantUseCaseRequest): Promise<void> {
-    await this.restaurantsRepository.update(id, body);
+    await this.IRestaurantsRepository.update(id, body);
   }
 }

@@ -1,5 +1,5 @@
 import { Product } from "@/models/products-model";
-import { ProductsRepository } from "@/repositories/products-repository";
+import { IProductsRepository } from "@/repositories/products-repository";
 
 type ListRestaurantProductsUseCaseRequest = {
   restaurant_id: string;
@@ -10,10 +10,10 @@ type ListRestaurantProductsUseCaseResponse = {
 };
 
 export class ListRestaurantProductsUseCase {
-  constructor(private productsRepository: ProductsRepository) {}
+  constructor(private IProductsRepository: IProductsRepository) {}
 
   async execute({ restaurant_id }: ListRestaurantProductsUseCaseRequest): Promise<ListRestaurantProductsUseCaseResponse> {
-    const products = await this.productsRepository.listRestaurantProducts(restaurant_id);
+    const products = await this.IProductsRepository.listRestaurantProducts(restaurant_id);
 
     return {
       products

@@ -1,9 +1,9 @@
 import { UpdateProductRequest } from "@/models/products-model";
 import { CreateRestaurantRequest, Restaurant } from "@/models/restaurants-model";
-import { RestaurantsRepository } from "@/repositories/restaurants-repository";
+import { IRestaurantsRepository } from "@/repositories/restaurants-repository";
 import { randomUUID } from "node:crypto";
 
-export class InMemoryRestaurantsRepository  implements RestaurantsRepository {
+export class InMemoryIRestaurantsRepository  implements IRestaurantsRepository {
   public restaurants: Restaurant[] = []; 
 
   async create(body: CreateRestaurantRequest) {

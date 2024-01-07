@@ -1,23 +1,23 @@
-import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
+import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { describe, it, expect, beforeEach } from "vitest";
 import { UpdateRestaurantUseCase } from "./update-restaurant";
 
-let restaurantsRepository: InMemoryRestaurantsRepository;
+let IRestaurantsRepository: InMemoryIRestaurantsRepository;
 let sut: UpdateRestaurantUseCase;
 
 describe("Update Restaurant Use Case", () => {
   beforeEach(() => {
-    restaurantsRepository = new InMemoryRestaurantsRepository();
-    sut = new UpdateRestaurantUseCase(restaurantsRepository);
+    IRestaurantsRepository = new InMemoryIRestaurantsRepository();
+    sut = new UpdateRestaurantUseCase(IRestaurantsRepository);
   });
 
   it("should be able to update restaurant", async () => {
-    await restaurantsRepository.create({
+    await IRestaurantsRepository.create({
       name: "Restaurante do Zé",
       address: "Avenida"
     });
 
-    const restaurantId = restaurantsRepository.restaurants[0].id;
+    const restaurantId = IRestaurantsRepository.restaurants[0].id;
 
     await sut.execute({
       id: restaurantId, 
@@ -25,7 +25,7 @@ describe("Update Restaurant Use Case", () => {
         name: "Rações do Ludi"
       }});
 
-    const restaurant =  await restaurantsRepository.getById(restaurantId);
+    const restaurant =  await IRestaurantsRepository.getById(restaurantId);
 
     expect(restaurant).toEqual(
       expect.objectContaining({

@@ -1,13 +1,13 @@
-import { RestaurantsRepository } from "@/repositories/restaurants-repository";
+import { IRestaurantsRepository } from "@/repositories/restaurants-repository";
 
 type DeleteRestaurantUseCaseRequest = {
   id: string
 }
 
 export class DeleteRestaurantUseCase {
-  constructor(private restaurantsRepository: RestaurantsRepository) {}
+  constructor(private IRestaurantsRepository: IRestaurantsRepository) {}
 
   async execute({ id }: DeleteRestaurantUseCaseRequest): Promise<void> {
-    await this.restaurantsRepository.deleteById(id);
+    await this.IRestaurantsRepository.deleteById(id);
   }
 }
