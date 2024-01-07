@@ -102,7 +102,7 @@ describe("Create Promotion Use Case", () => {
     ).rejects.toBeInstanceOf(InvalidWeekdayError);
   });
 
-  it("shouldn't able to create promotion if has invalid time format", async () => {
+  it("shouldn't able to create opening hours if time format be different than HH:mm", async () => {
 
     await restaurantsRepository.create({
       name: "Lanchonete",
