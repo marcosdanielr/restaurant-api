@@ -1,0 +1,1 @@
+export const MINIMUM_INTERVAL_TIME_IN_SECONDS = 15;
