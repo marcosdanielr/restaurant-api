@@ -6,6 +6,8 @@ import { MINIMUM_INTERVAL_TIME_IN_SECONDS } from "@/constants/minimum-interval-t
 import { MinimumIntervalTimeError } from "../errors/minimum-interval-time-error";
 import { validateTimeFormat } from "@/utils/validate-hour-format";
 import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
+import { WeekdaysEnum } from "@/constants/weekdays-enum";
+import { InvalidWeekdayError } from "../errors/invalid-weekday-error";
 
 export class CreatePromotionUseCase {
   constructor(private promotionsRepository: IPromotionsRepository) {}
@@ -18,6 +20,13 @@ export class CreatePromotionUseCase {
     start_time,
     end_time
   }: PromotionRequest): Promise<void> {
+
+    const isValidWeekDay = WeekdaysEnum[weekday];
+
+    if (!isValidWeekDay) {
+      throw new InvalidWeekdayError();
+    }
+
     const isNotValidHour = !validateTimeFormat(start_time) || !validateTimeFormat(end_time);
     
     if (isNotValidHour) {
