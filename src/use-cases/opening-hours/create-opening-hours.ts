@@ -5,8 +5,10 @@ import { WeekdaysEnum } from "@/constants/weekdays-enum";
 import { WeekdayAlreadyExistsError } from "../errors/weekday-already-exists-error";
 import { validateTimeFormat } from "@/utils/validate-hour-format";
 import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
-import { isMinimumIntervalFifteenMinutes } from "@/utils/calc-minutes-difference";
+
 import { MinimumIntervalTimeError } from "../errors/minimum-interval-time-error";
+import { MINIMUM_INTERVAL_TIME_IN_SECONDS } from "@/constants/minimum-interval-time-in-seconds";
+import { isMinimumIntervalInMinutes } from "@/utils/is-minimum-interval-in-minutes";
 
 export class CreateOpeningHoursUseCase {
   constructor(private openingHoursRepository: OpeningHoursRepository) {}
@@ -19,13 +21,17 @@ export class CreateOpeningHoursUseCase {
   }: OpeningHours): Promise<void> {
 
     const isNotValidHour = !validateTimeFormat(start_time) || !validateTimeFormat(end_time);
-
+    
     if (isNotValidHour) {
       throw new InvalidTimeFormatError();
-    }
-
-    if (!isMinimumIntervalFifteenMinutes(start_time, end_time)) {
-      throw new MinimumIntervalTimeError();
+    } 
+   
+    if (!isMinimumIntervalInMinutes(
+      start_time, 
+      end_time, 
+      MINIMUM_INTERVAL_TIME_IN_SECONDS
+    )) {
+      throw new MinimumIntervalTimeError(MINIMUM_INTERVAL_TIME_IN_SECONDS);
     }
 
     const isValidWeekDay = WeekdaysEnum[weekday];
