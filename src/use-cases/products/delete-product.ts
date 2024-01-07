@@ -6,12 +6,12 @@ type DeleteProductUseCaseRequest = {
 };
 
 export class DeleteProductUseCase {
-  constructor(private IProductsRepository: IProductsRepository) {}
+  constructor(private productsRepository: IProductsRepository) {}
 
   async execute({
     restaurant_id,
     id
   }: DeleteProductUseCaseRequest): Promise<void> {
-    await this.IProductsRepository.delete(restaurant_id, id);
+    await this.productsRepository.delete(restaurant_id, id);
   }
 }

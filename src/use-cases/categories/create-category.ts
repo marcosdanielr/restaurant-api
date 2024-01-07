@@ -7,13 +7,13 @@ type CreateCategoryUseCaseRequest = {
 }
 
 export class CreateCategoryUseCase {
-  constructor(private ICategoriesRepository: ICategoriesRepository) {}
+  constructor(private categoriesRepository: ICategoriesRepository) {}
 
   async execute({
     restaurant_id,
     body
   }: CreateCategoryUseCaseRequest): Promise<void> {
 
-    await this.ICategoriesRepository.create(restaurant_id, body);
+    await this.categoriesRepository.create(restaurant_id, body);
   }
 }

@@ -11,7 +11,7 @@ import { MINIMUM_INTERVAL_TIME_IN_SECONDS } from "@/constants/minimum-interval-t
 import { isMinimumIntervalInMinutes } from "@/utils/is-minimum-interval-in-minutes";
 
 export class CreateOpeningHoursUseCase {
-  constructor(private IOpeningHoursRepository: IOpeningHoursRepository) {}
+  constructor(private openingHoursRepository: IOpeningHoursRepository) {}
 
   async execute({
     restaurant_id,
@@ -40,7 +40,7 @@ export class CreateOpeningHoursUseCase {
       throw new InvalidWeekdayError();
     }
 
-    const openingHoursExists = await this.IOpeningHoursRepository.getByWeekday(
+    const openingHoursExists = await this.openingHoursRepository.getByWeekday(
       restaurant_id,
       weekday
     ); 
@@ -49,7 +49,7 @@ export class CreateOpeningHoursUseCase {
       throw new WeekdayAlreadyExistsError();
     }
 
-    await this.IOpeningHoursRepository.create({
+    await this.openingHoursRepository.create({
       restaurant_id,
       weekday,
       start_time,

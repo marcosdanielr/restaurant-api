@@ -3,7 +3,7 @@ import { IPromotionsRepository } from "@/repositories/promotions-repository";
 import { PromotionAlreadyExistsError } from "../errors/promotion-already-exists-error";
 
 export class CreatePromotionUseCase {
-  constructor(private IPromotionsRepository: IPromotionsRepository) {}
+  constructor(private promotionsRepository: IPromotionsRepository) {}
 
   async execute({
     product_id,
@@ -14,13 +14,13 @@ export class CreatePromotionUseCase {
     end_time
   }: PromotionRequest): Promise<void> {
 
-    const promotionExists = await this.IPromotionsRepository.getByWeekday(product_id, weekday);
+    const promotionExists = await this.promotionsRepository.getByWeekday(product_id, weekday);
 
     if (promotionExists) {
       throw new PromotionAlreadyExistsError();
     }
 
-    await this.IPromotionsRepository.create({
+    await this.promotionsRepository.create({
       product_id,
       description,
       price,

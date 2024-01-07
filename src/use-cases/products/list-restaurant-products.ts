@@ -10,10 +10,10 @@ type ListRestaurantProductsUseCaseResponse = {
 };
 
 export class ListRestaurantProductsUseCase {
-  constructor(private IProductsRepository: IProductsRepository) {}
+  constructor(private productsRepository: IProductsRepository) {}
 
   async execute({ restaurant_id }: ListRestaurantProductsUseCaseRequest): Promise<ListRestaurantProductsUseCaseResponse> {
-    const products = await this.IProductsRepository.listRestaurantProducts(restaurant_id);
+    const products = await this.productsRepository.listRestaurantProducts(restaurant_id);
 
     return {
       products

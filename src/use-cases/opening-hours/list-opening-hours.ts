@@ -10,13 +10,13 @@ type ListOpeningHoursUseCaseResponse = {
 }
 
 export class ListOpeningHoursUseCase {
-  constructor(private IOpeningHoursRepository: IOpeningHoursRepository) {}
+  constructor(private openingHoursRepository: IOpeningHoursRepository) {}
 
   async execute({
     restaurant_id,
   }: ListOpeningHoursUseCaseRequest): Promise<ListOpeningHoursUseCaseResponse> {
 
-    const openingHours = await this.IOpeningHoursRepository.list(restaurant_id);
+    const openingHours = await this.openingHoursRepository.list(restaurant_id);
 
     return {
       openingHours

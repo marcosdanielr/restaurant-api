@@ -8,13 +8,13 @@ type UpdateProductUseCaseRequest = {
 };
 
 export class UpdateProductUseCase {
-  constructor(private IProductsRepository: IProductsRepository) {}
+  constructor(private productsRepository: IProductsRepository) {}
 
   async execute({
     restaurant_id,
     id,
     body
   }: UpdateProductUseCaseRequest): Promise<void> {
-    await this.IProductsRepository.update(restaurant_id, id, body);
+    await this.productsRepository.update(restaurant_id, id, body);
   }
 }

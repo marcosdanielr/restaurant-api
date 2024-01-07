@@ -7,12 +7,12 @@ type CreateProductUseCaseRequest = {
 };
 
 export class CreateProductUseCase {
-  constructor(private IProductsRepository: IProductsRepository) {}
+  constructor(private productsRepository: IProductsRepository) {}
 
   async execute({
     restaurant_id,
     body,
   }: CreateProductUseCaseRequest): Promise<void> {
-    await this.IProductsRepository.create(restaurant_id, body);
+    await this.productsRepository.create(restaurant_id, body);
   }
 }

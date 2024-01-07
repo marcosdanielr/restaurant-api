@@ -6,11 +6,11 @@ type ListRestaurantsUseCaseResponse = {
 }
 
 export class ListRestaurantsUseCase {
-  constructor(private IRestaurantsRepository: IRestaurantsRepository) {}
+  constructor(private restaurantsRepository: IRestaurantsRepository) {}
 
   async execute(): Promise<ListRestaurantsUseCaseResponse> {
 
-    const restaurants = await this.IRestaurantsRepository.list();
+    const restaurants = await this.restaurantsRepository.list();
 
     return {
       restaurants

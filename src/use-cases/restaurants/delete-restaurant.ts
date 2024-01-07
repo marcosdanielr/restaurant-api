@@ -5,9 +5,9 @@ type DeleteRestaurantUseCaseRequest = {
 }
 
 export class DeleteRestaurantUseCase {
-  constructor(private IRestaurantsRepository: IRestaurantsRepository) {}
+  constructor(private restaurantsRepository: IRestaurantsRepository) {}
 
   async execute({ id }: DeleteRestaurantUseCaseRequest): Promise<void> {
-    await this.IRestaurantsRepository.deleteById(id);
+    await this.restaurantsRepository.deleteById(id);
   }
 }

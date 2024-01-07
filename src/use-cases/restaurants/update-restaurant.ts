@@ -7,9 +7,9 @@ type UpdateRestaurantUseCaseRequest = {
 }
 
 export class UpdateRestaurantUseCase {
-  constructor(private IRestaurantsRepository: IRestaurantsRepository) {}
+  constructor(private restaurantsRepository: IRestaurantsRepository) {}
 
   async execute({ id, body }: UpdateRestaurantUseCaseRequest): Promise<void> {
-    await this.IRestaurantsRepository.update(id, body);
+    await this.restaurantsRepository.update(id, body);
   }
 }

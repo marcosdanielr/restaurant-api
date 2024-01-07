@@ -10,13 +10,13 @@ type GetRestaurantUseCaseResponse = {
 }
 
 export class GetRestaurantUseCase {
-  constructor(private IRestaurantsRepository: IRestaurantsRepository) {}
+  constructor(private restaurantsRepository: IRestaurantsRepository) {}
 
   async execute({
     id
   }: GetRestaurantUseCaseRequest): Promise<GetRestaurantUseCaseResponse> {
 
-    const restaurant = await this.IRestaurantsRepository.getById(id);
+    const restaurant = await this.restaurantsRepository.getById(id);
 
     return {
       restaurant

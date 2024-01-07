@@ -2,7 +2,7 @@ import { CreateRestaurantRequest } from "@/models/restaurants-model";
 import { IRestaurantsRepository } from "@/repositories/restaurants-repository";
 
 export class CreateRestaurantUseCase {
-  constructor(private IRestaurantsRepository: IRestaurantsRepository) {}
+  constructor(private restaurantsRepository: IRestaurantsRepository) {}
 
   async execute({
     name,
@@ -10,7 +10,7 @@ export class CreateRestaurantUseCase {
     address
   }: CreateRestaurantRequest): Promise<void> {
 
-    await this.IRestaurantsRepository.create({
+    await this.restaurantsRepository.create({
       name,
       image_path,
       address
