@@ -4,48 +4,48 @@ import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memo
 import { InMemoryICategoriesRepository } from "@/repositories/in-memory/in-memory-categories-repository";
 import { ListRestaurantProductsUseCase } from "./list-restaurant-products";
 
-let IProductsRepository: InMemoryIProductsRepository;
-let IRestaurantsRepository: InMemoryIRestaurantsRepository;
-let ICategoriesRepository: InMemoryICategoriesRepository;
+let productsRepository: InMemoryIProductsRepository;
+let restaurantsRepository: InMemoryIRestaurantsRepository;
+let categoriesRepository: InMemoryICategoriesRepository;
 let sut: ListRestaurantProductsUseCase;
 
 describe("List Restaurant Products Use Case", () => {
   beforeEach(() => {
-    IProductsRepository = new InMemoryIProductsRepository();
-    IRestaurantsRepository = new InMemoryIRestaurantsRepository();
-    ICategoriesRepository = new InMemoryICategoriesRepository();
+    productsRepository = new InMemoryIProductsRepository();
+    restaurantsRepository = new InMemoryIRestaurantsRepository();
+    categoriesRepository = new InMemoryICategoriesRepository();
 
-    sut = new ListRestaurantProductsUseCase(IProductsRepository);
+    sut = new ListRestaurantProductsUseCase(productsRepository);
   });
 
   it("should be able to list products by restaurant id", async () => {
-    await IRestaurantsRepository.create({
+    await restaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
     });
 
 
-    await IRestaurantsRepository.create({
+    await restaurantsRepository.create({
       name: "Lanchonete - 2",
       address: "Avenida",
     });
 
-    const { id: first_restaurant_id } = IRestaurantsRepository.restaurants[0];
-    const { id: second_restaurant_id } = IRestaurantsRepository.restaurants[1];
+    const { id: first_restaurant_id } = restaurantsRepository.restaurants[0];
+    const { id: second_restaurant_id } = restaurantsRepository.restaurants[1];
 
-    await ICategoriesRepository.create(first_restaurant_id, {
+    await categoriesRepository.create(first_restaurant_id, {
       name: "Bebidas",
     });
 
 
-    await ICategoriesRepository.create(second_restaurant_id, {
+    await categoriesRepository.create(second_restaurant_id, {
       name: "Almoço",
     });
 
-    const { id: category_id } = ICategoriesRepository.categories[0];
+    const { id: category_id } = categoriesRepository.categories[0];
 
     for (let i = 0; i < 6; i++) {
-      await IProductsRepository.create(first_restaurant_id, {
+      await productsRepository.create(first_restaurant_id, {
         category_id,
         name: `product-${i}`, 
         price: i,
@@ -53,7 +53,7 @@ describe("List Restaurant Products Use Case", () => {
     }
 
     for (let i = 0; i < 4; i++) {
-      await IProductsRepository.create(second_restaurant_id, {
+      await productsRepository.create(second_restaurant_id, {
         category_id,
         name: `product-${i}`, 
         price: i,

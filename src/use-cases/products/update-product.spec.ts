@@ -4,27 +4,27 @@ import { UpdateProductUseCase } from "./update-product";
 import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { InMemoryICategoriesRepository } from "@/repositories/in-memory/in-memory-categories-repository";
 
-let IProductsRepository: InMemoryIProductsRepository;
-let IRestaurantsRepository: InMemoryIRestaurantsRepository;
+let productsRepository: InMemoryIProductsRepository;
+let restaurantsRepository: InMemoryIRestaurantsRepository;
 let ICategoriesRepository: InMemoryICategoriesRepository;
 let sut: UpdateProductUseCase;
 
 describe("Update Product Use Case", () => {
   beforeEach(() => {
-    IProductsRepository = new InMemoryIProductsRepository();
-    IRestaurantsRepository = new InMemoryIRestaurantsRepository();
+    productsRepository = new InMemoryIProductsRepository();
+    restaurantsRepository = new InMemoryIRestaurantsRepository();
     ICategoriesRepository = new InMemoryICategoriesRepository();
 
-    sut = new UpdateProductUseCase(IProductsRepository);
+    sut = new UpdateProductUseCase(productsRepository);
   });
 
   it("should be able to update product", async () => {
-    await IRestaurantsRepository.create({
+    await restaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
     });
 
-    const { id: restaurant_id } = IRestaurantsRepository.restaurants[0];
+    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
 
     await ICategoriesRepository.create(restaurant_id, {
       name: "Bebidas",
@@ -33,14 +33,14 @@ describe("Update Product Use Case", () => {
     const { id: category_id } = ICategoriesRepository.categories[0];
 
 
-    await IProductsRepository.create(restaurant_id, {
+    await productsRepository.create(restaurant_id, {
       category_id,
       name: "Monster",
       price: 9.5,
       image_path: "image_path/blabla.png"
     });
 
-    const product = IProductsRepository.products[0];
+    const product = productsRepository.products[0];
 
 
     await sut.execute({
@@ -53,7 +53,7 @@ describe("Update Product Use Case", () => {
       },
     });
 
-    const productUpdated = IProductsRepository.products[0];
+    const productUpdated = productsRepository.products[0];
 
     expect(product.name).not.toEqual(productUpdated.name);
     expect(productUpdated.name).toEqual("Monster Promotion!");

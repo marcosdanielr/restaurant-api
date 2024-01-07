@@ -7,25 +7,25 @@ import { WeekdayAlreadyExistsError } from "../errors/weekday-already-exists-erro
 import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
 import { MinimumIntervalTimeError } from "../errors/minimum-interval-time-error";
 
-let IRestaurantsRepository: InMemoryIRestaurantsRepository;
-let IOpeningHoursRepository: InMemoryIOpeningHoursRepository;
+let restaurantsRepository: InMemoryIRestaurantsRepository;
+let openingHoursRepository: InMemoryIOpeningHoursRepository;
 let sut: CreateOpeningHoursUseCase;
 
 describe("Create Opening Hours Use Case", () => {
   beforeEach(() => {
-    IRestaurantsRepository = new InMemoryIRestaurantsRepository();
-    IOpeningHoursRepository = new InMemoryIOpeningHoursRepository();
-    sut = new CreateOpeningHoursUseCase(IOpeningHoursRepository);
+    restaurantsRepository = new InMemoryIRestaurantsRepository();
+    openingHoursRepository = new InMemoryIOpeningHoursRepository();
+    sut = new CreateOpeningHoursUseCase(openingHoursRepository);
   });
 
   it("should be able to create opening hour", async () => {
 
-    await IRestaurantsRepository.create({
+    await restaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
     });
 
-    const { id: restaurant_id } = IRestaurantsRepository.restaurants[0];
+    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
 
     await sut.execute({
       restaurant_id,
@@ -34,7 +34,7 @@ describe("Create Opening Hours Use Case", () => {
       end_time: "18:00"
     });
 
-    const openingHours = IOpeningHoursRepository.openingHours;
+    const openingHours = openingHoursRepository.openingHours;
 
     expect(openingHours[0]).toEqual(
       expect.objectContaining({
@@ -47,12 +47,12 @@ describe("Create Opening Hours Use Case", () => {
   });
 
   it("shouldn't able to create opening hours if has invalid weekday", async () => {
-    await IRestaurantsRepository.create({
+    await restaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
     });
 
-    const { id: restaurant_id } = IRestaurantsRepository.restaurants[0];
+    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
 
     await expect(() => 
       sut.execute({
@@ -66,12 +66,12 @@ describe("Create Opening Hours Use Case", () => {
 
 
   it("shouldn't able to create opening hours if already exists", async () => {
-    await IRestaurantsRepository.create({
+    await restaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
     });
 
-    const { id: restaurant_id } = IRestaurantsRepository.restaurants[0];
+    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
 
     await sut.execute({
       restaurant_id,
@@ -92,12 +92,12 @@ describe("Create Opening Hours Use Case", () => {
 
 
   it("shouldn't able to create opening hours if time format be different than HH:mm", async () => {
-    await IRestaurantsRepository.create({
+    await restaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
     });
 
-    const { id: restaurant_id } = IRestaurantsRepository.restaurants[0];
+    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
 
     await expect(() => 
       sut.execute({
@@ -111,12 +111,12 @@ describe("Create Opening Hours Use Case", () => {
 
 
   it("It shouldn't be possible to create an opening hour if the time interval is not greater than 15 minutes", async () => {
-    await IRestaurantsRepository.create({
+    await restaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
     });
 
-    const { id: restaurant_id } = IRestaurantsRepository.restaurants[0];
+    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
 
     await expect(() => 
       sut.execute({
@@ -127,5 +127,4 @@ describe("Create Opening Hours Use Case", () => {
       })
     ).rejects.toBeInstanceOf(MinimumIntervalTimeError);
   });
-
 });

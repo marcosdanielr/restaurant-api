@@ -3,27 +3,27 @@ import { ListOpeningHoursUseCase } from "./list-opening-hours";
 import { InMemoryIOpeningHoursRepository } from "@/repositories/in-memory/in-memory-opening-hours-repository";
 import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 
-let IRestaurantsRepository: InMemoryIRestaurantsRepository;
-let IOpeningHoursRepository: InMemoryIOpeningHoursRepository;
+let restaurantsRepository: InMemoryIRestaurantsRepository;
+let openingHoursRepository: InMemoryIOpeningHoursRepository;
 let sut: ListOpeningHoursUseCase;
 
 describe("List Opening Hours Use Case", () => {
   beforeEach(() => {
-    IRestaurantsRepository = new InMemoryIRestaurantsRepository();
-    IOpeningHoursRepository = new InMemoryIOpeningHoursRepository();
-    sut = new ListOpeningHoursUseCase(IOpeningHoursRepository);
+    restaurantsRepository = new InMemoryIRestaurantsRepository();
+    openingHoursRepository = new InMemoryIOpeningHoursRepository();
+    sut = new ListOpeningHoursUseCase(openingHoursRepository);
   });
 
   it("should be able to list opening hours", async () => {
 
-    await IRestaurantsRepository.create({
+    await restaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
     });
 
-    const { id: restaurant_id } = IRestaurantsRepository.restaurants[0];
+    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
 
-    await IOpeningHoursRepository.create({
+    await openingHoursRepository.create({
       restaurant_id,
       weekday: "FRIDAY",
       start_time: "06:00",
@@ -31,7 +31,7 @@ describe("List Opening Hours Use Case", () => {
     });
 
 
-    await IOpeningHoursRepository.create({
+    await openingHoursRepository.create({
       restaurant_id,
       weekday: "MONDAY",
       start_time: "06:00",

@@ -2,33 +2,33 @@ import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memo
 import { describe, it, expect, beforeEach } from "vitest";
 import { DeleteRestaurantUseCase } from "./delete-restaurant";
 
-let IRestaurantsRepository: InMemoryIRestaurantsRepository;
+let restaurantsRepository: InMemoryIRestaurantsRepository;
 let sut: DeleteRestaurantUseCase;
 
 describe("Delete Restaurant Use Case", () => {
   beforeEach(() => {
-    IRestaurantsRepository = new InMemoryIRestaurantsRepository();
-    sut = new DeleteRestaurantUseCase(IRestaurantsRepository);
+    restaurantsRepository = new InMemoryIRestaurantsRepository();
+    sut = new DeleteRestaurantUseCase(restaurantsRepository);
   });
 
   it("should be able to delete restaurant", async () => {
 
     for (let i = 0; i < 5; i++) {
-      await IRestaurantsRepository.create({
+      await restaurantsRepository.create({
         name: `Restaurante ${i}`,
         address: `Avenida ${i}`
       });
     }
 
-    const restaurantId = IRestaurantsRepository.restaurants[2].id;
+    const restaurantId = restaurantsRepository.restaurants[2].id;
 
     await sut.execute({
       id: restaurantId
     });
 
-    const restaurant =  await IRestaurantsRepository.getById(restaurantId);
+    const restaurant =  await restaurantsRepository.getById(restaurantId);
 
     expect(restaurant).toEqual(null);
-    expect(IRestaurantsRepository.restaurants.length).toEqual(4);
+    expect(restaurantsRepository.restaurants.length).toEqual(4);
   });
 });

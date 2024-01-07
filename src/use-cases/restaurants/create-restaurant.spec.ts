@@ -2,13 +2,13 @@ import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memo
 import { describe, it, expect, beforeEach } from "vitest";
 import { CreateRestaurantUseCase } from "./create-restaurant";
 
-let IRestaurantsRepository: InMemoryIRestaurantsRepository;
+let restaurantsRepository: InMemoryIRestaurantsRepository;
 let sut: CreateRestaurantUseCase;
 
 describe("Create Restaurant Use Case", () => {
   beforeEach(() => {
-    IRestaurantsRepository = new InMemoryIRestaurantsRepository();
-    sut = new CreateRestaurantUseCase(IRestaurantsRepository);
+    restaurantsRepository = new InMemoryIRestaurantsRepository();
+    sut = new CreateRestaurantUseCase(restaurantsRepository);
   });
 
   it("should be able to create restaurant", async () => {
@@ -17,7 +17,7 @@ describe("Create Restaurant Use Case", () => {
       address: "Avenida tal",
     });
 
-    expect(IRestaurantsRepository.restaurants).toEqual([
+    expect(restaurantsRepository.restaurants).toEqual([
       expect.objectContaining({
         id: expect.any(String),
         name: "The Burguer",
