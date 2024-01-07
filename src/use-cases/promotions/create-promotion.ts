@@ -1,6 +1,9 @@
 import { Promotion as PromotionRequest } from "@/models/promotions-model";
 import { IPromotionsRepository } from "@/repositories/promotions-repository";
 import { PromotionAlreadyExistsError } from "../errors/promotion-already-exists-error";
+import { isMinimumIntervalInMinutes } from "@/utils/is-minimum-interval-in-minutes";
+import { MINIMUM_INTERVAL_TIME_IN_SECONDS } from "@/constants/minimum-interval-time-in-seconds";
+import { MinimumIntervalTimeError } from "../errors/minimum-interval-time-error";
 
 export class CreatePromotionUseCase {
   constructor(private promotionsRepository: IPromotionsRepository) {}
@@ -18,6 +21,14 @@ export class CreatePromotionUseCase {
 
     if (promotionExists) {
       throw new PromotionAlreadyExistsError();
+    }
+
+    if (!isMinimumIntervalInMinutes(
+      start_time, 
+      end_time, 
+      MINIMUM_INTERVAL_TIME_IN_SECONDS
+    )) {
+      throw new MinimumIntervalTimeError(MINIMUM_INTERVAL_TIME_IN_SECONDS);
     }
 
     await this.promotionsRepository.create({
