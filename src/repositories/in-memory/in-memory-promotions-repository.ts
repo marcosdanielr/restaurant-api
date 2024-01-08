@@ -2,7 +2,7 @@ import { Promotion } from "@/models/promotions-model";
 import { IPromotionsRepository } from "../promotions-repository";
 import { Weekday } from "@/types/weekday";
 
-export class InMemoryIPromotionsRepository implements IPromotionsRepository {
+export class InMemoryPromotionsRepository implements IPromotionsRepository {
   public promotions: Promotion[] = [];
 
   async create(body: Promotion) {

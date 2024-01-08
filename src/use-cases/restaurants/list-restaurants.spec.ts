@@ -1,13 +1,13 @@
-import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
+import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { describe, it, expect, beforeEach } from "vitest";
 import { ListRestaurantsUseCase } from "./list-restaurants";
 
-let restaurantsRepository: InMemoryIRestaurantsRepository;
+let restaurantsRepository: InMemoryRestaurantsRepository;
 let sut: ListRestaurantsUseCase;
 
 describe("List Restaurants Use Case", () => {
   beforeEach(() => {
-    restaurantsRepository = new InMemoryIRestaurantsRepository();
+    restaurantsRepository = new InMemoryRestaurantsRepository();
     sut = new ListRestaurantsUseCase(restaurantsRepository);
   });
 

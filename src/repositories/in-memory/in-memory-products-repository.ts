@@ -3,7 +3,7 @@ import { IProductsRepository } from "../products-repository";
 
 import { randomUUID } from "crypto";
 
-export class InMemoryIProductsRepository implements IProductsRepository {
+export class InMemoryProductsRepository implements IProductsRepository {
   public products: Product[] = [];
 
   async create(restaurant_id: string, body: CreateProductRequest) {

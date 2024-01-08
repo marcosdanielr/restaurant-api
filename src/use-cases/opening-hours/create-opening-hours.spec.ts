@@ -1,20 +1,20 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { CreateOpeningHoursUseCase } from "./create-opening-hours";
-import { InMemoryIOpeningHoursRepository } from "@/repositories/in-memory/in-memory-opening-hours-repository";
-import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
+import { InMemoryOpeningHoursRepository } from "@/repositories/in-memory/in-memory-opening-hours-repository";
+import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { InvalidWeekdayError } from "../errors/invalid-weekday-error";
 import { WeekdayAlreadyExistsError } from "../errors/weekday-already-exists-error";
 import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
 import { MinimumIntervalTimeError } from "../errors/minimum-interval-time-error";
 
-let restaurantsRepository: InMemoryIRestaurantsRepository;
-let openingHoursRepository: InMemoryIOpeningHoursRepository;
+let restaurantsRepository: InMemoryRestaurantsRepository;
+let openingHoursRepository: InMemoryOpeningHoursRepository;
 let sut: CreateOpeningHoursUseCase;
 
 describe("Create Opening Hours Use Case", () => {
   beforeEach(() => {
-    restaurantsRepository = new InMemoryIRestaurantsRepository();
-    openingHoursRepository = new InMemoryIOpeningHoursRepository();
+    restaurantsRepository = new InMemoryRestaurantsRepository();
+    openingHoursRepository = new InMemoryOpeningHoursRepository();
     sut = new CreateOpeningHoursUseCase(openingHoursRepository);
   });
 

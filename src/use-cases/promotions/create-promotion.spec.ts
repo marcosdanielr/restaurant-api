@@ -1,25 +1,25 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
-import { InMemoryIPromotionsRepository } from "@/repositories/in-memory/in-memory-promotions-repository";
+import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
+import { InMemoryPromotionsRepository } from "@/repositories/in-memory/in-memory-promotions-repository";
 import { CreatePromotionUseCase } from "./create-promotion";
-import { InMemoryIProductsRepository } from "@/repositories/in-memory/in-memory-products-repository";
-import { InMemoryICategoriesRepository } from "@/repositories/in-memory/in-memory-categories-repository";
+import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-products-repository";
+import { InMemoryCategoriesRepository } from "@/repositories/in-memory/in-memory-categories-repository";
 import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
 import { InvalidWeekdayError } from "../errors/invalid-weekday-error";
 import { PromotionAlreadyExistsError } from "../errors/promotion-already-exists-error";
 
-let restaurantsRepository: InMemoryIRestaurantsRepository;
-let categoriesRepository: InMemoryICategoriesRepository;
-let productsRepository: InMemoryIProductsRepository;
-let promotionsRepository: InMemoryIPromotionsRepository;
+let restaurantsRepository: InMemoryRestaurantsRepository;
+let categoriesRepository: InMemoryCategoriesRepository;
+let productsRepository: InMemoryProductsRepository;
+let promotionsRepository: InMemoryPromotionsRepository;
 let sut: CreatePromotionUseCase;
 
 describe("Create Promotion Use Case", () => {
   beforeEach(() => {
-    restaurantsRepository = new InMemoryIRestaurantsRepository();
-    categoriesRepository = new InMemoryICategoriesRepository();
-    productsRepository = new InMemoryIProductsRepository();
-    promotionsRepository = new InMemoryIPromotionsRepository();
+    restaurantsRepository = new InMemoryRestaurantsRepository();
+    categoriesRepository = new InMemoryCategoriesRepository();
+    productsRepository = new InMemoryProductsRepository();
+    promotionsRepository = new InMemoryPromotionsRepository();
     sut = new CreatePromotionUseCase(promotionsRepository);
   });
 

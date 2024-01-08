@@ -1,16 +1,16 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { ListOpeningHoursUseCase } from "./list-opening-hours";
-import { InMemoryIOpeningHoursRepository } from "@/repositories/in-memory/in-memory-opening-hours-repository";
-import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
+import { InMemoryOpeningHoursRepository } from "@/repositories/in-memory/in-memory-opening-hours-repository";
+import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 
-let restaurantsRepository: InMemoryIRestaurantsRepository;
-let openingHoursRepository: InMemoryIOpeningHoursRepository;
+let restaurantsRepository: InMemoryRestaurantsRepository;
+let openingHoursRepository: InMemoryOpeningHoursRepository;
 let sut: ListOpeningHoursUseCase;
 
 describe("List Opening Hours Use Case", () => {
   beforeEach(() => {
-    restaurantsRepository = new InMemoryIRestaurantsRepository();
-    openingHoursRepository = new InMemoryIOpeningHoursRepository();
+    restaurantsRepository = new InMemoryRestaurantsRepository();
+    openingHoursRepository = new InMemoryOpeningHoursRepository();
     sut = new ListOpeningHoursUseCase(openingHoursRepository);
   });
 

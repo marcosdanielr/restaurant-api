@@ -2,7 +2,7 @@ import { Category, CategoryRequest } from "@/models/categories-model";
 import { ICategoriesRepository } from "../categories-repository";
 import { randomUUID } from "crypto";
 
-export class InMemoryICategoriesRepository  implements ICategoriesRepository {
+export class InMemoryCategoriesRepository  implements ICategoriesRepository {
   public categories: Category[] = []; 
 
   async create(restaurant_id: string, body: CategoryRequest) {

@@ -1,19 +1,19 @@
-import { InMemoryIProductsRepository } from "@/repositories/in-memory/in-memory-products-repository";
+import { InMemoryProductsRepository } from "@/repositories/in-memory/in-memory-products-repository";
 import { describe, it, expect, beforeEach } from "vitest";
 import { UpdateProductUseCase } from "./update-product";
-import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
-import { InMemoryICategoriesRepository } from "@/repositories/in-memory/in-memory-categories-repository";
+import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
+import { InMemoryCategoriesRepository } from "@/repositories/in-memory/in-memory-categories-repository";
 
-let productsRepository: InMemoryIProductsRepository;
-let restaurantsRepository: InMemoryIRestaurantsRepository;
-let ICategoriesRepository: InMemoryICategoriesRepository;
+let productsRepository: InMemoryProductsRepository;
+let restaurantsRepository: InMemoryRestaurantsRepository;
+let ICategoriesRepository: InMemoryCategoriesRepository;
 let sut: UpdateProductUseCase;
 
 describe("Update Product Use Case", () => {
   beforeEach(() => {
-    productsRepository = new InMemoryIProductsRepository();
-    restaurantsRepository = new InMemoryIRestaurantsRepository();
-    ICategoriesRepository = new InMemoryICategoriesRepository();
+    productsRepository = new InMemoryProductsRepository();
+    restaurantsRepository = new InMemoryRestaurantsRepository();
+    ICategoriesRepository = new InMemoryCategoriesRepository();
 
     sut = new UpdateProductUseCase(productsRepository);
   });

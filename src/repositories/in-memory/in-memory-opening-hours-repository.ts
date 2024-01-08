@@ -3,7 +3,7 @@ import { IOpeningHoursRepository } from "../opening-hours-repository";
 import { Weekday } from "@/types/weekday";
 
 
-export class InMemoryIOpeningHoursRepository implements IOpeningHoursRepository {
+export class InMemoryOpeningHoursRepository implements IOpeningHoursRepository {
   public openingHours: OpeningHours[] = []; 
 
   async create(body: OpeningHours) {

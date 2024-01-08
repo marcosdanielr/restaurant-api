@@ -1,13 +1,13 @@
-import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
+import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { describe, it, expect, beforeEach } from "vitest";
 import { DeleteRestaurantUseCase } from "./delete-restaurant";
 
-let restaurantsRepository: InMemoryIRestaurantsRepository;
+let restaurantsRepository: InMemoryRestaurantsRepository;
 let sut: DeleteRestaurantUseCase;
 
 describe("Delete Restaurant Use Case", () => {
   beforeEach(() => {
-    restaurantsRepository = new InMemoryIRestaurantsRepository();
+    restaurantsRepository = new InMemoryRestaurantsRepository();
     sut = new DeleteRestaurantUseCase(restaurantsRepository);
   });
 

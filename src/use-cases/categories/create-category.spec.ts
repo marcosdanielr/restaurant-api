@@ -1,16 +1,16 @@
-import { InMemoryICategoriesRepository } from "@/repositories/in-memory/in-memory-categories-repository";
+import { InMemoryCategoriesRepository } from "@/repositories/in-memory/in-memory-categories-repository";
 import { describe, it, expect, beforeEach } from "vitest";
 import { CreateCategoryUseCase } from "./create-category";
-import { InMemoryIRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
+import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 
-let categoriesRepository: InMemoryICategoriesRepository;
-let restaurantsRepository: InMemoryIRestaurantsRepository;
+let categoriesRepository: InMemoryCategoriesRepository;
+let restaurantsRepository: InMemoryRestaurantsRepository;
 let sut: CreateCategoryUseCase;
 
 describe("Create Category Use Case", () => {
   beforeEach(() => {
-    categoriesRepository = new InMemoryICategoriesRepository();
-    restaurantsRepository = new InMemoryIRestaurantsRepository();
+    categoriesRepository = new InMemoryCategoriesRepository();
+    restaurantsRepository = new InMemoryRestaurantsRepository();
 
     sut = new CreateCategoryUseCase(categoriesRepository);
   });

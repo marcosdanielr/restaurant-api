@@ -3,7 +3,7 @@ import { CreateRestaurantRequest, Restaurant } from "@/models/restaurants-model"
 import { IRestaurantsRepository } from "@/repositories/restaurants-repository";
 import { randomUUID } from "node:crypto";
 
-export class InMemoryIRestaurantsRepository  implements IRestaurantsRepository {
+export class InMemoryRestaurantsRepository  implements IRestaurantsRepository {
   public restaurants: Restaurant[] = []; 
 
   async create(body: CreateRestaurantRequest) {
