@@ -6,6 +6,7 @@ import { InMemoryIProductsRepository } from "@/repositories/in-memory/in-memory-
 import { InMemoryICategoriesRepository } from "@/repositories/in-memory/in-memory-categories-repository";
 import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
 import { InvalidWeekdayError } from "../errors/invalid-weekday-error";
+import { PromotionAlreadyExistsError } from "../errors/promotion-already-exists-error";
 
 let restaurantsRepository: InMemoryIRestaurantsRepository;
 let categoriesRepository: InMemoryICategoriesRepository;
@@ -102,8 +103,50 @@ describe("Create Promotion Use Case", () => {
     ).rejects.toBeInstanceOf(InvalidWeekdayError);
   });
 
-  it("shouldn't able to create opening hours if time format be different than HH:mm", async () => {
+  it("shouldn't able to create promotion if already exists", async () => {
+    await restaurantsRepository.create({
+      name: "Lanchonete",
+      address: "Avenida",
+    });
 
+    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
+
+    await categoriesRepository.create(restaurant_id, {
+      name: "Bebidas"
+    });
+
+    const { id: category_id} = categoriesRepository.categories[0];
+
+    await productsRepository.create(restaurant_id, {
+      name: "Monster",
+      price: 9.50,
+      category_id
+    });
+
+    const { id: product_id } = productsRepository.products[0];
+
+    await sut.execute({
+      product_id, 
+      price: 7.50,
+      description: "Promoção!",
+      weekday: "SUNDAY",
+      start_time: "08:10",
+      end_time: "18:00"
+    });
+
+    await expect(() => 
+      sut.execute({
+        product_id, 
+        price: 7.50,
+        description: "Promoção!",
+        weekday: "SUNDAY",
+        start_time: "08:10",
+        end_time: "18:00"
+      })
+    ).rejects.toBeInstanceOf(PromotionAlreadyExistsError);
+  });
+
+  it("shouldn't able to create opening hours if time format be different than HH:mm", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
       address: "Avenida",
