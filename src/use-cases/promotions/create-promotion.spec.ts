@@ -97,7 +97,7 @@ describe("Create Promotion Use Case", () => {
         price: 7.50,
         description: "Promoção!",
         weekday: "TEST" as any,
-        start_time: "08h10",
+        start_time: "08:10",
         end_time: "18:00"
       })
     ).rejects.toBeInstanceOf(InvalidWeekdayError);
