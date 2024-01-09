@@ -22,7 +22,6 @@ describe("Create Opening Hours Use Case", () => {
 
     await restaurantsRepository.create({
       name: "Lanchonete",
-      address: "Avenida",
     });
 
     const { id: restaurant_id } = restaurantsRepository.restaurants[0];
@@ -49,7 +48,6 @@ describe("Create Opening Hours Use Case", () => {
   it("shouldn't able to create opening hours if has invalid weekday", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
-      address: "Avenida",
     });
 
     const { id: restaurant_id } = restaurantsRepository.restaurants[0];
@@ -68,7 +66,6 @@ describe("Create Opening Hours Use Case", () => {
   it("shouldn't able to create opening hours if already exists", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
-      address: "Avenida",
     });
 
     const { id: restaurant_id } = restaurantsRepository.restaurants[0];
@@ -94,7 +91,6 @@ describe("Create Opening Hours Use Case", () => {
   it("shouldn't able to create opening hours if time format be different than HH:mm", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
-      address: "Avenida",
     });
 
     const { id: restaurant_id } = restaurantsRepository.restaurants[0];
@@ -113,7 +109,6 @@ describe("Create Opening Hours Use Case", () => {
   it("It shouldn't be possible to create an opening hour if the time interval is not greater than 15 minutes", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
-      address: "Avenida",
     });
 
     const { id: restaurant_id } = restaurantsRepository.restaurants[0];

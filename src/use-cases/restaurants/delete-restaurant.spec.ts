@@ -16,7 +16,6 @@ describe("Delete Restaurant Use Case", () => {
     for (let i = 0; i < 5; i++) {
       await restaurantsRepository.create({
         name: `Restaurante ${i}`,
-        address: `Avenida ${i}`
       });
     }
 

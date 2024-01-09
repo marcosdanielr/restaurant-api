@@ -27,7 +27,6 @@ describe("Create Promotion Use Case", () => {
 
     await restaurantsRepository.create({
       name: "Lanchonete",
-      address: "Avenida",
     });
 
     const { id: restaurant_id } = restaurantsRepository.restaurants[0];
@@ -74,7 +73,6 @@ describe("Create Promotion Use Case", () => {
   it("shouldn't able to create promotion if has invalid weekday", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
-      address: "Avenida",
     });
 
     const { id: restaurant_id } = restaurantsRepository.restaurants[0];
@@ -108,7 +106,6 @@ describe("Create Promotion Use Case", () => {
   it("shouldn't able to create promotion if already exists", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
-      address: "Avenida",
     });
 
     const { id: restaurant_id } = restaurantsRepository.restaurants[0];
@@ -151,7 +148,6 @@ describe("Create Promotion Use Case", () => {
   it("shouldn't able to create opening hours if time format be different than HH:mm", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
-      address: "Avenida",
     });
 
     const { id: restaurant_id } = restaurantsRepository.restaurants[0];

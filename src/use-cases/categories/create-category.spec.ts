@@ -19,7 +19,6 @@ describe("Create Category Use Case", () => {
 
     await restaurantsRepository.create({
       name: "Salgados",
-      address: "Avenida"
     });
 
     const { id: restaurant_id  } = restaurantsRepository.restaurants[0];

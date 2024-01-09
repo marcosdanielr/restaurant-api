@@ -5,11 +5,11 @@ import { app } from "@/app";
 export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
   async create(body: CreateRestaurantRequest) {
 
-    const {name, image_path, address} = body;
+    const {name, image_path } = body;
 
     const result = await app.pg.query(
-      "INSERT INTO restaurants (name, image_path, address) VALUES ($1, $2, $3) RETURNING *",
-      [name, image_path, address]
+      "INSERT INTO restaurants (name, image_path) VALUES ($1, $2, $3) RETURNING *",
+      [name, image_path]
     );
 
     console.log({

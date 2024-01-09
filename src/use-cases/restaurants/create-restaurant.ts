@@ -7,13 +7,11 @@ export class CreateRestaurantUseCase {
   async execute({
     name,
     image_path,
-    address
   }: CreateRestaurantRequest): Promise<void> {
 
     await this.restaurantsRepository.create({
       name,
       image_path,
-      address
     });
   }
 }

@@ -17,11 +17,9 @@ describe("Get Restaurant Use Case", () => {
       [
         restaurantsRepository.create({
           name: "Burguer",
-          address: "Avenida",
         }),
         restaurantsRepository.create({
           name: "Lanchonete",
-          address: "Avenida 2",
         })
       ]
     ); 

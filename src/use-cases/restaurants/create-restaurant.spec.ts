@@ -14,14 +14,12 @@ describe("Create Restaurant Use Case", () => {
   it("should be able to create restaurant", async () => {
     await sut.execute({
       name: "The Burguer",
-      address: "Avenida tal",
     });
 
     expect(restaurantsRepository.restaurants).toEqual([
       expect.objectContaining({
         id: expect.any(String),
         name: "The Burguer",
-        address: "Avenida tal",
         created_at: expect.any(Date),
         updated_at: expect.any(Date),
       })

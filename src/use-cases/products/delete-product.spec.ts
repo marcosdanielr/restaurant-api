@@ -22,7 +22,6 @@ describe("Delete Product Use Case", () => {
 
     await restaurantsRepository.create({
       name: "Lanchonete",
-      address: "Avenida",
     });
 
     const { id: restaurant_id } = restaurantsRepository.restaurants[0];

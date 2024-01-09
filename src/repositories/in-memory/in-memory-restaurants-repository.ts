@@ -11,7 +11,6 @@ export class InMemoryRestaurantsRepository  implements IRestaurantsRepository {
     const restaurant = {
       id: randomUUID(),
       name: body.name,
-      address: body.address,
       image_path: body.image_path,
       created_at: new Date(),
       updated_at: new Date(),

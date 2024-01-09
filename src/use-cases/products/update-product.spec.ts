@@ -21,7 +21,6 @@ describe("Update Product Use Case", () => {
   it("should be able to update product", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
-      address: "Avenida",
     });
 
     const { id: restaurant_id } = restaurantsRepository.restaurants[0];

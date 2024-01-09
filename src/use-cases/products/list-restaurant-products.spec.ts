@@ -21,13 +21,11 @@ describe("List Restaurant Products Use Case", () => {
   it("should be able to list products by restaurant id", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
-      address: "Avenida",
     });
 
 
     await restaurantsRepository.create({
       name: "Lanchonete - 2",
-      address: "Avenida",
     });
 
     const { id: first_restaurant_id } = restaurantsRepository.restaurants[0];

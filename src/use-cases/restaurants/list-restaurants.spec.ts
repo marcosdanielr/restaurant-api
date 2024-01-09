@@ -17,11 +17,9 @@ describe("List Restaurants Use Case", () => {
       [
         restaurantsRepository.create({
           name: "Burguer",
-          address: "Avenida",
         }),
         restaurantsRepository.create({
           name: "Lanchonete",
-          address: "Avenida 2",
         })
       ]
     ); 
@@ -33,14 +31,12 @@ describe("List Restaurants Use Case", () => {
       expect.objectContaining({
         id: expect.any(String),
         name: "Burguer",
-        address: "Avenida",
         created_at: expect.any(Date),
         updated_at: expect.any(Date),
       }),
       expect.objectContaining({
         id: expect.any(String),
         name: "Lanchonete",
-        address: "Avenida 2",
         created_at: expect.any(Date),
         updated_at: expect.any(Date),
       }),
