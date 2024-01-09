@@ -1,7 +1,7 @@
 import { RestaurantAddress } from "@/models/restaurant-address-model";
-import { IRestaurantsAddressRepository } from "../restaurant-address-repository";
+import { IRestaurantAddressRepository } from "../restaurant-address-repository";
 
-export class InMemoryRestaurantAddressRepository implements IRestaurantsAddressRepository {
+export class InMemoryRestaurantAddressRepository implements IRestaurantAddressRepository {
   public restaurantsAdresses: RestaurantAddress[] = []; 
 
   async create(body: RestaurantAddress) {
