@@ -1,4 +1,4 @@
-import { Promotion as PromotionRequest } from "@/models/promotions-model";
+import { CreatePromotionRequest } from "@/models/promotions-model";
 import { IPromotionsRepository } from "@/repositories/promotions-repository";
 import { PromotionAlreadyExistsError } from "../errors/promotion-already-exists-error";
 import { isMinimumIntervalInMinutes } from "@/utils/is-minimum-interval-in-minutes";
@@ -19,7 +19,7 @@ export class CreatePromotionUseCase {
     weekday,
     start_time,
     end_time
-  }: PromotionRequest): Promise<void> {
+  }: CreatePromotionRequest): Promise<void> {
 
     const isValidWeekDay = WeekdaysEnum[weekday];
 
