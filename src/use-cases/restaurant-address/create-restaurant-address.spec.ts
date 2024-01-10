@@ -24,6 +24,8 @@ describe("Create Restaurant Address Use Case", () => {
 
     await sut.execute({
       restaurant_id,
+      city: "São Paulo",
+      state: "SP",
       street: "Rua tal",
       district: "Algum bairro aí",
       number: 231,

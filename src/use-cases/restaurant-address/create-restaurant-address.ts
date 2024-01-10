@@ -6,6 +6,8 @@ export class CreateRestaurantAddressUseCase {
 
   async execute({
     restaurant_id,
+    city,
+    state,
     street,
     district,
     number,
@@ -14,6 +16,8 @@ export class CreateRestaurantAddressUseCase {
 
     await this.restaurantAdressRepository.create({
       restaurant_id,
+      city,
+      state,
       street,
       district,
       number,
