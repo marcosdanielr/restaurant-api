@@ -17,4 +17,10 @@ export class InMemoryRestaurantAddressRepository implements IRestaurantAddressRe
 
     this.restaurantsAdresses.push(restaurantAddress);
   }
+
+  async getByRestaurantId(restaurant_id: string) {
+    const restaurantAddress = this.restaurantsAdresses.find(restaurantAddress => restaurantAddress.restaurant_id === restaurant_id) ?? null;
+
+    return restaurantAddress;
+  }
 }
