@@ -5,10 +5,12 @@ export class InMemoryRestaurantAddressRepository implements IRestaurantAddressRe
   public restaurantsAdresses: RestaurantAddress[] = []; 
 
   async create(body: RestaurantAddress) {
-    const { restaurant_id, street, district, number, zip_code } = body;
+    const { restaurant_id, city, state, street, district, number, zip_code } = body;
 
     const restaurantAddress: RestaurantAddress = {
       restaurant_id,
+      city,
+      state,
       street,
       district,
       number,
