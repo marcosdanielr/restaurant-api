@@ -25,5 +25,9 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
   }
 
   async deleteById(id: string) {
+    await app.pg.query(
+      "DELETE FROM restaurants WHERE id = $1 RETURNING *",
+      [id]
+    );
   }
 }
