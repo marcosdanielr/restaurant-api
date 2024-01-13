@@ -3,7 +3,7 @@ import { makeCreateRestaurantUseCase } from "@/use-cases/factories/restaurants/m
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
-export async function create(request: FastifyRequest, reply: FastifyReply) {
+export async function createRestaurant(request: FastifyRequest, reply: FastifyReply) {
   const createRestaurantBodySchema = z.object({
     name: z.string(),
     image_path: z.string().optional(),

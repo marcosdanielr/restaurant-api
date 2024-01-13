@@ -1,14 +1,13 @@
 import { FastifyInstance } from "fastify";
 
-import { create } from "./create";
-import { deleteById } from "./delete";
-import { getById } from "./get";
-import { list } from "./list";
-
+import { createRestaurant } from "./create-restaurant";
+import { deleteRestaurantById } from "./delete-restaurant-by-id";
+import { getRestaurantById } from "./get-restaurant-by-id";
+import { listRestaurants } from "./list-restaurants";
 
 export async function restaurantsRoutes(app: FastifyInstance) {
-  app.post("/restaurants", create);
-  app.delete("/restaurants/:id", deleteById);
-  app.get("/restaurants/:id", getById);
-  app.get("/restaurants", list);
+  app.post("/restaurants", createRestaurant);
+  app.delete("/restaurants/:id", deleteRestaurantById);
+  app.get("/restaurants/:id", getRestaurantById);
+  app.get("/restaurants", listRestaurants);
 }

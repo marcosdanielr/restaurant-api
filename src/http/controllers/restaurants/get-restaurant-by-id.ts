@@ -3,7 +3,7 @@ import { makeGetRestaurantUseCase } from "@/use-cases/factories/restaurants/make
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
-export async function getById(request: FastifyRequest, reply: FastifyReply) {
+export async function getRestaurantById(request: FastifyRequest, reply: FastifyReply) {
 
   const getRestaurantBodySchema = z.object({
     id: z.string(),

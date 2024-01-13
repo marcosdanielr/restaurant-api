@@ -3,7 +3,7 @@ import { makeDeleteRestaurantUseCase } from "@/use-cases/factories/restaurants/m
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
-export async function deleteById(request: FastifyRequest, reply: FastifyReply) {
+export async function deleteRestaurantById(request: FastifyRequest, reply: FastifyReply) {
 
   const deleteRestaurantBodySchema = z.object({
     id: z.string(),
