@@ -15,7 +15,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
   await createRestaurantUseCase.execute({
     name,
-    image_path
+    image_path: image_path ?? ""
   });
 
   return reply.status(StatusCodes.CREATED).send();

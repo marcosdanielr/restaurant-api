@@ -7,14 +7,10 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
 
     const {name, image_path } = body;
 
-    const result = await app.pg.query(
-      "INSERT INTO restaurants (name, image_path) VALUES ($1, $2, $3) RETURNING *",
+    await app.pg.query(
+      "INSERT INTO restaurants (name, image_path) VALUES ($1, $2) RETURNING *",
       [name, image_path]
     );
-
-    console.log({
-      result
-    });
   }
 
   async list() {
