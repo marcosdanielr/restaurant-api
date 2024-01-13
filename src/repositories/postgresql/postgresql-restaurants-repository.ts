@@ -20,7 +20,16 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
   async update(id: string, data: UpdateRestaurantRequest) {
   }
 
-  async getById(id: string){
+  async getById(id: string) {
+    const { rows: restaurants } = await app.pg.query(
+      "SELECT * FROM restaurants WHERE id = $1",
+      [id]
+    );
+
+    const [ restaurant ] = restaurants;
+
+    return restaurant ?? null;
+
     return null;
   }
 
