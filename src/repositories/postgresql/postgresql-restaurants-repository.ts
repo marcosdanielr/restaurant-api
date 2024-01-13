@@ -23,6 +23,12 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
   }
 
   async update(id: string, data: UpdateRestaurantRequest) {
+    const { name, image_path } = data;
+
+    await app.pg.query(
+      "UPDATE restaurants SET name = $2, image_path = $3 WHERE id = $1 RETURNING *",
+      [id, name, image_path]
+    );
   }
 
   async getById(id: string) {
@@ -34,8 +40,6 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
     const [ restaurant ] = restaurants;
 
     return restaurant ?? null;
-
-    return null;
   }
 
   async deleteById(id: string) {
