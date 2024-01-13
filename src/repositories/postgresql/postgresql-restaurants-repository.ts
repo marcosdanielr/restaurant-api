@@ -24,6 +24,6 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
     return null;
   }
 
-  deleteById(id: string) {
+  async deleteById(id: string) {
   }
 }

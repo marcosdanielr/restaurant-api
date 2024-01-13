@@ -1,5 +1,5 @@
 import { PostgreSQLRestaurantsRepository } from "@/repositories/postgresql/postgresql-restaurants-repository";
-import { CreateRestaurantUseCase } from "../restaurants/create-restaurant";
+import { CreateRestaurantUseCase } from "@/use-cases/restaurants/create-restaurant";
 
 export function makeCreateRestaurantseCase() {
   const restaurantsRepository = new PostgreSQLRestaurantsRepository();
