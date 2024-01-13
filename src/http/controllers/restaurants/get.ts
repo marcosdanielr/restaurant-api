@@ -1,5 +1,5 @@
 import { StatusCodes } from "@/constants/status-codes-enum";
-import { makeGetRestaurantseCase } from "@/use-cases/factories/restaurants/make-get-restaurant-use-case";
+import { makeGetRestaurantUseCase } from "@/use-cases/factories/restaurants/make-get-restaurant-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -11,7 +11,7 @@ export async function getById(request: FastifyRequest, reply: FastifyReply) {
 
   const { id } = getRestaurantBodySchema.parse(request.params);
 
-  const getRestaurantUseCase = makeGetRestaurantseCase();
+  const getRestaurantUseCase = makeGetRestaurantUseCase();
 
   const restaurant = await getRestaurantUseCase.execute({
     id

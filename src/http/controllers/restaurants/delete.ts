@@ -1,5 +1,5 @@
 import { StatusCodes } from "@/constants/status-codes-enum";
-import { makeDeleteRestaurantseCase } from "@/use-cases/factories/restaurants/make-delete-restaurant-use-case";
+import { makeDeleteRestaurantUseCase } from "@/use-cases/factories/restaurants/make-delete-restaurant-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -11,7 +11,7 @@ export async function deleteById(request: FastifyRequest, reply: FastifyReply) {
 
   const { id } = deleteRestaurantBodySchema.parse(request.params);
 
-  const deleteRestaurantUseCase = makeDeleteRestaurantseCase();
+  const deleteRestaurantUseCase = makeDeleteRestaurantUseCase();
 
   await deleteRestaurantUseCase.execute({
     id
