@@ -14,7 +14,12 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
   }
 
   async list() {
-    return [];
+    const { rows: restaurants } = await app.pg.query(
+      "SELECT * FROM restaurants",
+      []
+    );
+
+    return restaurants;
   }
 
   async update(id: string, data: UpdateRestaurantRequest) {
