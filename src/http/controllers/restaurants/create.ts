@@ -1,5 +1,5 @@
 import { StatusCodes } from "@/constants/status-codes-enum";
-import { makeCreateRestaurantseCase } from "@/use-cases/factories/make-create-restaurant-use-case";
+import { makeCreateRestaurantseCase } from "@/use-cases/factories/restaurants/make-create-restaurant-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
