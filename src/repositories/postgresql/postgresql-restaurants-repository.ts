@@ -7,14 +7,10 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
 
     const {name, image_path } = body;
 
-    const result = await app.pg.query(
-      "INSERT INTO restaurants (name, image_path) VALUES ($1, $2, $3) RETURNING *",
+    await app.pg.query(
+      "INSERT INTO restaurants (name, image_path) VALUES ($1, $2) RETURNING *",
       [name, image_path]
     );
-
-    console.log({
-      result
-    });
   }
 
   async list() {
@@ -28,6 +24,10 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
     return null;
   }
 
-  deleteById(id: string) {
+  async deleteById(id: string) {
+    await app.pg.query(
+      "DELETE FROM restaurants WHERE id = $1 RETURNING *",
+      [id]
+    );
   }
 }
