@@ -1,5 +1,5 @@
 import { StatusCodes } from "@/constants/status-codes-enum";
-import { makeCreateRestaurantseCase } from "@/use-cases/factories/restaurants/make-create-restaurant-use-case";
+import { makeCreateRestaurantUseCase } from "@/use-cases/factories/restaurants/make-create-restaurant-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -11,7 +11,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
   const { name, image_path } = createRestaurantBodySchema.parse(request.body);
 
-  const createRestaurantUseCase = makeCreateRestaurantseCase();
+  const createRestaurantUseCase = makeCreateRestaurantUseCase();
 
   await createRestaurantUseCase.execute({
     name,
