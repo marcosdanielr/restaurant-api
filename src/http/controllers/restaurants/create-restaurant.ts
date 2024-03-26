@@ -9,6 +9,7 @@ export async function createRestaurant(request: FastifyRequest, reply: FastifyRe
     image_path: z.string().optional(),
   });
 
+
   const { name, image_path } = createRestaurantBodySchema.parse(request.body);
 
   const createRestaurantUseCase = makeCreateRestaurantUseCase();
