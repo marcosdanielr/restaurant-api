@@ -5,9 +5,10 @@ import { StatusCodes } from "./constants/status-codes-enum";
 import { ZodError } from "zod";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
-
-import { restaurantsRoutes } from "./http/routes/restaurants-routes";
 import fastifyCors from "@fastify/cors";
+
+import { routes } from "./http/routes";
+
 
 export const app = fastify();
 
@@ -29,7 +30,7 @@ app.register(fastifyPostgres, {
   connectionString: env.DATABASE_URL 
 });
 
-app.register(restaurantsRoutes);
+app.register(routes);
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
