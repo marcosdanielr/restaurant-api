@@ -14,16 +14,16 @@ export class PostgreSQLProductsRepository implements IProductsRepository {
     );
   }
 
- async delete(restaurant_id: string, id: string) {
+  async delete(restaurant_id: string, id: string) {
       
   }
 
- async update(restaurant_id: string, id: string, body: UpdateProductRequest) {
+  async update(restaurant_id: string, id: string, body: UpdateProductRequest) {
       
   }
 
   async listRestaurantProducts(restaurant_id: string) {
-     return [] 
+    return []; 
   }
 
 
