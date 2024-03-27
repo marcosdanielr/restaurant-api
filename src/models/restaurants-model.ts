@@ -14,5 +14,4 @@ export type CreateRestaurantRequest = {
 export type UpdateRestaurantRequest = {
     name?: string;
     image_path?: string;
-  }
-  
+  } 
