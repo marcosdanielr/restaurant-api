@@ -27,7 +27,7 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
     const { name, image_path } = data;
 
     if (!id) {
-      return
+      return;
     }
 
     await app.pg.query(
@@ -40,7 +40,7 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
     const id = req_id;
 
     if (!id) {
-      return null
+      return null;
     }
 
     const { rows: restaurants } = await app.pg.query(
@@ -58,7 +58,7 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
     const id = req_id;
 
     if (!id) {
-      return
+      return;
     }
 
     await app.pg.query(
