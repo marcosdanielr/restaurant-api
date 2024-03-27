@@ -22,8 +22,13 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
     return restaurants;
   }
 
-  async update(id: string, data: UpdateRestaurantRequest) {
+  async update(req_id: string, data: UpdateRestaurantRequest) {
+    const id = req_id;
     const { name, image_path } = data;
+
+    if (!id) {
+      return
+    }
 
     await app.pg.query(
       "UPDATE restaurants SET name = $2, image_path = $3 WHERE id = $1 RETURNING *",
@@ -31,18 +36,31 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
     );
   }
 
-  async getById(id: string) {
+  async getById(req_id: string) {
+    const id = req_id;
+
+    if (!id) {
+      return null
+    }
+
     const { rows: restaurants } = await app.pg.query(
-      "SELECT * FROM restaurants WHERE id = $1",
+      "SELECT * FROM restaurants WHERE id = $1 LIMIT 1",
       [id]
     );
 
+
     const [ restaurant ] = restaurants;
 
-    return restaurant ?? null;
+    return restaurant;
   }
 
-  async deleteById(id: string) {
+  async deleteById(req_id: string) {
+    const id = req_id;
+
+    if (!id) {
+      return
+    }
+
     await app.pg.query(
       "DELETE FROM restaurants WHERE id = $1 RETURNING *",
       [id]
