@@ -18,7 +18,7 @@ export class InMemoryCategoriesRepository  implements ICategoriesRepository {
     this.categories.push(category);
   }
 
-  async listCategories(restaurant_id: string) {
+  async list(restaurant_id: string) {
     const categories = this.categories.filter(category => category.restaurant_id === restaurant_id);
 
     return categories;          

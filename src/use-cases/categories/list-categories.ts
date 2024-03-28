@@ -16,7 +16,7 @@ export class ListCategoriesUseCase {
     restaurant_id
   }: ListCategoriesUseCaseRequest): Promise<ListCategoriesUseCaseResponse> {
 
-    const categories = await this.categoriesRepository.listCategories(restaurant_id);
+    const categories = await this.categoriesRepository.list(restaurant_id);
 
     return {
       categories
