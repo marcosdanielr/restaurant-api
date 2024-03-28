@@ -1,5 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { createCategory } from "../controllers/categories/create-category";
+import { listCategories } from "../controllers/categories/list-categories";
 
 export async function categoriesRoutes(app: FastifyInstance) {
 
@@ -16,5 +17,14 @@ export async function categoriesRoutes(app: FastifyInstance) {
     }
   },
   createCategory
+  );
+
+
+  app.get("/categories/:restaurant_id", {
+    schema: {
+      tags: ["Categories"],
+    }
+  },
+  listCategories
   );
 }
