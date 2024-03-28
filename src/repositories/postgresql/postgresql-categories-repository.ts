@@ -13,4 +13,16 @@ export class PostgreSQLCategoriesRepository implements ICategoriesRepository {
       [name, restaurant_id]
     );
   }
+
+  async list(restaurant_id_req: string) {
+    const restaurant_id = restaurant_id_req;
+
+    const { rows: categories } = await app.pg.query(
+      "SELECT * FROM categories WHERE restaurant_id = $1",
+      [restaurant_id]
+    );
+
+    return categories;
+      
+  }
 }
