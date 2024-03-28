@@ -3,14 +3,14 @@ import { makeListCategoriesUseCase } from "@/use-cases/factories/categories/make
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
-export async function createCategories(request: FastifyRequest, reply: FastifyReply) {
+export async function listCategories(request: FastifyRequest, reply: FastifyReply) {
   const createCategoriesBodySchema = z.object({
     restaurant_id: z.string(),
   });
 
   const { 
     restaurant_id
-  } = createCategoriesBodySchema.parse(request.query);
+  } = createCategoriesBodySchema.parse(request.params);
 
   const listCategoriesUseCase = makeListCategoriesUseCase();
 
