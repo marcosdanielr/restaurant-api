@@ -2,8 +2,8 @@ import { PostgreSQLProductsRepository } from "@/repositories/postgresql/postgres
 import { CreateProductUseCase } from "@/use-cases/products/create-product";
 
 export function makeCreateProductUseCase() {
-  const restaurantsRepository = new PostgreSQLProductsRepository();
-  const useCase = new CreateProductUseCase(restaurantsRepository);
+  const productsRepository = new PostgreSQLProductsRepository();
+  const useCase = new CreateProductUseCase(productsRepository);
 
   return useCase;
 }
