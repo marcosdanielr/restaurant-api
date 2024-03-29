@@ -17,11 +17,11 @@ export async function listOpeningHours(request: FastifyRequest, reply: FastifyRe
   const listOpeningHoursUseCase = makeListOpeningHoursUseCase();
 
   try {
-    await listOpeningHoursUseCase.execute({
+    const openingHours = await listOpeningHoursUseCase.execute({
       restaurant_id,
     });
 
-    return reply.status(StatusCodes.CREATED).send();
+    return reply.status(StatusCodes.CREATED).send(openingHours);
   } catch (error) {
     if (error instanceof RestaurantNotFoundError) {
       return reply.status(StatusCodes.NOT_FOUND).send({
