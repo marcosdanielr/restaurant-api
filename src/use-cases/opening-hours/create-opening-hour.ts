@@ -45,7 +45,7 @@ export class CreateOpeningHoursUseCase {
       throw new MinimumIntervalTimeError(MINIMUM_INTERVAL_TIME_IN_SECONDS);
     }
 
-    const isValidWeekDay = WeekdaysEnum[weekday];
+    const isValidWeekDay = weekday.toUpperCase() in WeekdaysEnum;
 
     if (!isValidWeekDay) {
       throw new InvalidWeekdayError();

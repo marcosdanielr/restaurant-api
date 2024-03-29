@@ -24,7 +24,7 @@ describe("List Opening Hours Use Case", () => {
 
     await openingHoursRepository.create({
       restaurant_id,
-      weekday: "FRIDAY",
+      weekday: "friday",
       start_time: "06:00",
       end_time: "12:00",
     });
@@ -32,7 +32,7 @@ describe("List Opening Hours Use Case", () => {
 
     await openingHoursRepository.create({
       restaurant_id,
-      weekday: "MONDAY",
+      weekday: "monday",
       start_time: "06:00",
       end_time: "12:00",
     });
@@ -45,11 +45,11 @@ describe("List Opening Hours Use Case", () => {
       expect.arrayContaining([
         expect.objectContaining({
           restaurant_id,
-          weekday: "FRIDAY",
+          weekday: "friday",
         }),
         expect.objectContaining({
           restaurant_id,
-          weekday: "MONDAY",
+          weekday: "monday",
         })
       ])
     );
