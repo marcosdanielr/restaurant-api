@@ -6,7 +6,7 @@ import { z } from "zod";
 
 export async function createProduct(request: FastifyRequest, reply: FastifyReply) {
   const createProductBodySchema = z.object({
-    restaurant_id: z.string(),
+    restaurant_id: z.string().uuid(),
     name: z.string(),
     image_path: z.string().optional(),
     price: z.number(),
