@@ -23,6 +23,28 @@ CREATE TABLE IF NOT EXISTS "restaurant_addresses" (
   CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE
 );
 
+CREATE TYPE "weekday_type" AS ENUM(
+  'sunday',
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday'
+);
+
+CREATE TABLE IF NOT EXISTS "opening_hours" (
+  "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
+  "restaurant_id" uuid NOT NULL,
+  "weekday" "weekday_type" NOT NULL,
+  "start_time" TIME,
+  "end_time" TIME,
+  "created_at" TIMESTAMP DEFAULT NOW() NOT NULL,
+  "updated_at" TIMESTAMP DEFAULT NOW() NOT NULL,
+  CONSTRAINT pk_opening_hours PRIMARY KEY (id),
+  CONSTRAINT fk_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS "categories" (
   "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
   "restaurant_id" uuid NOT NULL,
