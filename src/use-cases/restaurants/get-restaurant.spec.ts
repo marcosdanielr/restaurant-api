@@ -1,6 +1,7 @@
 import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { describe, it, expect, beforeEach } from "vitest";
 import { GetRestaurantUseCase } from "./get-restaurant";
+import { RestaurantNotFoundError } from "../errors/restaurant-not-found-error";
 
 let restaurantsRepository: InMemoryRestaurantsRepository;
 let sut: GetRestaurantUseCase;
@@ -30,5 +31,12 @@ describe("Get Restaurant Use Case", () => {
     });
 
     expect(restaurant).toEqual(restaurantsRepository.restaurants[0]);
+  });
+
+  it("should not be able to get restaurant by id", async () => {
+    expect(async () =>   await sut.execute({
+      id: "321sdudsjh221" 
+    }))
+      .rejects.toBeInstanceOf(RestaurantNotFoundError);
   });
 });

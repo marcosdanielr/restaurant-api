@@ -1,16 +1,16 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { InMemoryRestaurantAddressRepository } from "@/repositories/in-memory/in-memory-restaurant-address-repository";
 import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { GetRestaurantAddressUseCase } from "./get-restaurant-address";
+import { InMemoryRestaurantAddressesRepository } from "@/repositories/in-memory/in-memory-restaurant-addresses-repository";
 
 let restaurantsRepository: InMemoryRestaurantsRepository;
-let restaurantAddressRepository: InMemoryRestaurantAddressRepository;
+let restaurantAddressRepository: InMemoryRestaurantAddressesRepository;
 let sut: GetRestaurantAddressUseCase;
 
 describe("Get Restaurant Address Use Case", () => {
   beforeEach(() => {
     restaurantsRepository = new InMemoryRestaurantsRepository();
-    restaurantAddressRepository = new InMemoryRestaurantAddressRepository();
+    restaurantAddressRepository = new InMemoryRestaurantAddressesRepository();
     sut = new GetRestaurantAddressUseCase(restaurantAddressRepository);
   });
 
@@ -45,9 +45,10 @@ describe("Get Restaurant Address Use Case", () => {
 
     expect(restaurantAddress).toEqual(
       expect.objectContaining({
-        restaurant_id
+        id: expect.any(String),
+        restaurant_id,
+        created_at: expect.any(Date)
       })
     );
-
   });
 });

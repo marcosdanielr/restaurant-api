@@ -1,5 +1,6 @@
 import { Restaurant } from "@/models/restaurants-model";
 import { IRestaurantsRepository } from "@/repositories/restaurants-repository";
+import { RestaurantNotFoundError } from "../errors/restaurant-not-found-error";
 
 type GetRestaurantUseCaseRequest = {
   id: string
@@ -17,6 +18,10 @@ export class GetRestaurantUseCase {
   }: GetRestaurantUseCaseRequest): Promise<GetRestaurantUseCaseResponse> {
 
     const restaurant = await this.restaurantsRepository.getById(id);
+
+    if (!restaurant) {
+      throw new RestaurantNotFoundError();
+    }
 
     return {
       restaurant

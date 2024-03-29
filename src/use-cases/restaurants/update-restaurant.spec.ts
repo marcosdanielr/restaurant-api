@@ -1,6 +1,7 @@
 import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { describe, it, expect, beforeEach } from "vitest";
 import { UpdateRestaurantUseCase } from "./update-restaurant";
+import { RestaurantNotFoundError } from "../errors/restaurant-not-found-error";
 
 let restaurantsRepository: InMemoryRestaurantsRepository;
 let sut: UpdateRestaurantUseCase;
@@ -31,5 +32,15 @@ describe("Update Restaurant Use Case", () => {
         name: "Rações do Ludi",
       })
     );
+  });
+
+  it("should not be able to update restaurant if not exists", async () => {
+    await expect(() => 
+      sut.execute({
+        id: "2231231dsa3", 
+        body: {
+          name: "Rações do Ludi"
+        }})
+    ).rejects.toBeInstanceOf(RestaurantNotFoundError);
   });
 });

@@ -1,5 +1,5 @@
-import { IRestaurantAddressRepository } from "@/repositories/restaurant-address-repository";
-import { RestaurantAddress } from "@/models/restaurant-address-model";
+import { RestaurantAddress } from "@/models/restaurant-addresses-model";
+import { IRestaurantAddressesRepository } from "@/repositories/restaurant-addresses-repository";
 
 type GetRestaurantAddressUseCaseRequest = {
   restaurant_id: string
@@ -10,11 +10,11 @@ type GetRestaurantAddressUseCaseResponse = {
 }
 
 export class GetRestaurantAddressUseCase {
-  constructor(private restaurantsRepository: IRestaurantAddressRepository) {}
+  constructor(private restaurantAddressesRepository: IRestaurantAddressesRepository) {}
 
   async execute({ restaurant_id }: GetRestaurantAddressUseCaseRequest): Promise<GetRestaurantAddressUseCaseResponse> {
 
-    const restaurantAddress = await this.restaurantsRepository.getByRestaurantId(restaurant_id);
+    const restaurantAddress = await this.restaurantAddressesRepository.getByRestaurantId(restaurant_id);
 
     return {
       restaurantAddress
