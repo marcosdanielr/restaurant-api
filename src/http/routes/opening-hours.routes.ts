@@ -1,5 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { createOpeningHour } from "../controllers/opening-hours/create-opening-hour";
+import { listOpeningHours } from "../controllers/opening-hours/list-opening-hours";
 
 export async function openingHoursRoutes(app: FastifyInstance) {
 
@@ -16,7 +17,12 @@ export async function openingHoursRoutes(app: FastifyInstance) {
         }
       }
     }
-  },
-  createOpeningHour
-  );
+  }, createOpeningHour);
+
+  app.get("/opening-hours/:restaurant_id", {
+    schema: {
+      tags: ["Opening Hours"],
+    }
+  }, listOpeningHours);
+
 }
