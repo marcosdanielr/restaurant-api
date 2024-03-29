@@ -16,11 +16,11 @@ export async function getRestaurantAddress(request: FastifyRequest, reply: Fasti
   const getRestaurantAddressUseCase = makeGetRestaurantAddressUseCase();
 
   try {
-    await getRestaurantAddressUseCase.execute({
+    const restaurantAddress = await getRestaurantAddressUseCase.execute({
       restaurant_id
     });
 
-    return reply.status(StatusCodes.OK).send();
+    return reply.status(StatusCodes.OK).send(restaurantAddress);
   } catch (error) {
     if (error instanceof RestaurantNotFoundError) {
       return reply.status(StatusCodes.NOT_FOUND).send(error.message);
