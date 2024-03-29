@@ -16,10 +16,9 @@ export async function updateRestaurantById(request: FastifyRequest, reply: Fasti
 
   const { id } = updateRestaurantParamsSchema.parse(request.params);
   const { name, image_path } = updateRestaurantBodySchema.parse(request.body);
+  const updateRestaurantUseCase = makeUpdateRestaurantUseCase();
 
   try {
-    const updateRestaurantUseCase = makeUpdateRestaurantUseCase();
-
     await updateRestaurantUseCase.execute({
       id,
       body: {
