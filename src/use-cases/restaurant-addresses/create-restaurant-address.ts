@@ -1,4 +1,4 @@
-import { RestaurantAddress } from "@/models/restaurant-address-model";
+import { RestaurantAddress } from "@/models/restaurant-addresses-model";
 import { IRestaurantAddressRepository } from "@/repositories/restaurant-address-repository";
 import { RestaurantAddressAlreadyExistsError } from "../errors/restaurant-address-already-exists-error";
 

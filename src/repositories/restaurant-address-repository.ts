@@ -1,4 +1,4 @@
-import { RestaurantAddress } from "@/models/restaurant-address-model";
+import { RestaurantAddress } from "@/models/restaurant-addresses-model";
 
 export interface IRestaurantAddressRepository {
   create(body: RestaurantAddress): Promise<void>;

@@ -1,5 +1,5 @@
 import { IRestaurantAddressRepository } from "@/repositories/restaurant-address-repository";
-import { RestaurantAddress } from "@/models/restaurant-address-model";
+import { RestaurantAddress } from "@/models/restaurant-addresses-model";
 
 type GetRestaurantAddressUseCaseRequest = {
   restaurant_id: string

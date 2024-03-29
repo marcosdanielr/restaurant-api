@@ -1,4 +1,4 @@
-import { RestaurantAddress } from "@/models/restaurant-address-model";
+import { RestaurantAddress } from "@/models/restaurant-addresses-model";
 import { IRestaurantAddressRepository } from "../restaurant-address-repository";
 
 export class InMemoryRestaurantAddressRepository implements IRestaurantAddressRepository {
