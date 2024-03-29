@@ -17,7 +17,8 @@ export class InMemoryRestaurantAddressesRepository implements IRestaurantAddress
       district,
       number,
       zip_code,
-      created_at: new Date()
+      created_at: new Date(),
+      updated_at: new Date()
     };
 
     this.restaurantsAdresses.push(restaurantAddress);
