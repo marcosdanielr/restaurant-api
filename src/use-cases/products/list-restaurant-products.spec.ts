@@ -15,7 +15,7 @@ describe("List Restaurant Products Use Case", () => {
     restaurantsRepository = new InMemoryRestaurantsRepository();
     categoriesRepository = new InMemoryCategoriesRepository();
 
-    sut = new ListRestaurantProductsUseCase(productsRepository);
+    sut = new ListRestaurantProductsUseCase(productsRepository, restaurantsRepository);
   });
 
   it("should be able to list products by restaurant id", async () => {
