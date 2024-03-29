@@ -62,7 +62,7 @@ describe("Create Promotion Use Case", () => {
         product_id, 
         price: 7.50,
         description: "Promoção!",
-        weekday: "SUNDAY",
+        weekday: "sunday",
         start_time: "08:10",
         end_time: "18:00",
         created_at: expect.any(Date)
