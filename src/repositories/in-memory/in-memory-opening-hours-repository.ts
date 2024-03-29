@@ -1,4 +1,4 @@
-import { CreateOpeningHoursRequest, OpeningHours } from "@/models/opening-hours-model";
+import { CreateOpeningHourRequest, OpeningHours } from "@/models/opening-hours-model";
 import { IOpeningHoursRepository } from "../opening-hours-repository";
 import { Weekday } from "@/types/weekday";
 import { randomUUID } from "crypto";
@@ -7,7 +7,7 @@ import { randomUUID } from "crypto";
 export class InMemoryOpeningHoursRepository implements IOpeningHoursRepository {
   public openingHours: OpeningHours[] = []; 
 
-  async create(body: CreateOpeningHoursRequest) {
+  async create(body: CreateOpeningHourRequest) {
     const { restaurant_id, weekday, start_time, end_time } = body;
 
     const openingHour: OpeningHours = {

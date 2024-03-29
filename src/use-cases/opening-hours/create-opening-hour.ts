@@ -4,7 +4,7 @@ import { WeekdaysEnum } from "@/constants/weekdays-enum";
 import { WeekdayAlreadyExistsError } from "../errors/weekday-already-exists-error";
 import { validateTimeFormat } from "@/utils/validate-hour-format";
 import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
-import { CreateOpeningHoursRequest } from "@/models/opening-hours-model";
+import { CreateOpeningHourRequest } from "@/models/opening-hours-model";
 
 import { MinimumIntervalTimeError } from "../errors/minimum-interval-time-error";
 import { MINIMUM_INTERVAL_TIME_IN_SECONDS } from "@/constants/minimum-interval-time-in-seconds";
@@ -12,7 +12,7 @@ import { isMinimumIntervalInMinutes } from "@/utils/is-minimum-interval-in-minut
 import { IRestaurantsRepository } from "@/repositories/restaurants-repository";
 import { RestaurantNotFoundError } from "../errors/restaurant-not-found-error";
 
-export class CreateOpeningHoursUseCase {
+export class CreateOpeningHourUseCase {
   constructor(
     private openingHoursRepository: IOpeningHoursRepository,
     private restaurantsRepository: IRestaurantsRepository
@@ -23,7 +23,7 @@ export class CreateOpeningHoursUseCase {
     weekday,
     start_time,
     end_time,
-  }: CreateOpeningHoursRequest): Promise<void> {
+  }: CreateOpeningHourRequest): Promise<void> {
 
     const restaurantExists = await this.restaurantsRepository.getById(restaurant_id);
 

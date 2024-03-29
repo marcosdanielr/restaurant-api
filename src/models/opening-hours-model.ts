@@ -11,7 +11,7 @@ export type OpeningHours = {
 }
 
 
-export type CreateOpeningHoursRequest = {
+export type CreateOpeningHourRequest = {
   restaurant_id: string;
   weekday: Weekday;
   start_time: string;

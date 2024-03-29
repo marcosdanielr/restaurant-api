@@ -4,17 +4,17 @@ import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memor
 import { WeekdayAlreadyExistsError } from "../errors/weekday-already-exists-error";
 import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
 import { MinimumIntervalTimeError } from "../errors/minimum-interval-time-error";
-import { CreateOpeningHoursUseCase } from "./create-opening-hour";
+import { CreateOpeningHourUseCase } from "./create-opening-hour";
 
 let restaurantsRepository: InMemoryRestaurantsRepository;
 let openingHoursRepository: InMemoryOpeningHoursRepository;
-let sut: CreateOpeningHoursUseCase;
+let sut: CreateOpeningHourUseCase;
 
-describe("Create Opening Hours Use Case", () => {
+describe("Create Opening Hour Use Case", () => {
   beforeEach(() => {
     restaurantsRepository = new InMemoryRestaurantsRepository();
     openingHoursRepository = new InMemoryOpeningHoursRepository();
-    sut = new CreateOpeningHoursUseCase(openingHoursRepository, restaurantsRepository);
+    sut = new CreateOpeningHourUseCase(openingHoursRepository, restaurantsRepository);
   });
 
   it("should be able to create opening hour", async () => {
@@ -44,7 +44,7 @@ describe("Create Opening Hours Use Case", () => {
     );
   });
 
-  it("shouldn't able to create opening hours if already exists", async () => {
+  it("shouldn't able to create opening hour if already exists", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
     });
@@ -69,7 +69,7 @@ describe("Create Opening Hours Use Case", () => {
   });
 
 
-  it("shouldn't able to create opening hours if time format be different than HH:mm", async () => {
+  it("shouldn't able to create opening hour if time format be different than HH:mm", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
     });

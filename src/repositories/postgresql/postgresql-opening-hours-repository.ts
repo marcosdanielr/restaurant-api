@@ -1,11 +1,11 @@
 import { app } from "@/app";
 import { IOpeningHoursRepository } from "../opening-hours-repository";
 import { Weekday } from "@/types/weekday";
-import { CreateOpeningHoursRequest } from "@/models/opening-hours-model";
+import { CreateOpeningHourRequest } from "@/models/opening-hours-model";
 
 export class PostgreSQLOpeningHoursRepository implements IOpeningHoursRepository {
 
-  async create(body: CreateOpeningHoursRequest) {
+  async create(body: CreateOpeningHourRequest) {
     const { restaurant_id, weekday, start_time, end_time } = body;
 
     await app.pg.query(
