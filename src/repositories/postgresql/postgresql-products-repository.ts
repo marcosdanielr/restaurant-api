@@ -22,9 +22,15 @@ export class PostgreSQLProductsRepository implements IProductsRepository {
       
   }
 
-  async listByRestaurantId(restaurant_id: string) {
-    return []; 
+  async listByRestaurantId(restaurant_id_req: string) {
+    const restaurant_id = restaurant_id_req;
+
+    const { rows: products } = await app.pg.query(
+      "SELECT * FROM products WHERE restaurant_id = $1",
+      [restaurant_id]
+    );
+
+
+    return products; 
   }
-
-
 }
