@@ -3,6 +3,7 @@ import { CreateRestaurantAddressUseCase } from "./create-restaurant-address";
 import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { RestaurantAddressAlreadyExistsError } from "../errors/restaurant-address-already-exists-error";
 import { InMemoryRestaurantAddressesRepository } from "@/repositories/in-memory/in-memory-restaurant-addresses-repository";
+import { RestaurantNotFoundError } from "../errors/restaurant-not-found-error";
 
 let restaurantsRepository: InMemoryRestaurantsRepository;
 let restaurantAddressRepository: InMemoryRestaurantAddressesRepository;
@@ -12,7 +13,7 @@ describe("Create Restaurant Address Use Case", () => {
   beforeEach(() => {
     restaurantsRepository = new InMemoryRestaurantsRepository();
     restaurantAddressRepository = new InMemoryRestaurantAddressesRepository;
-    sut = new CreateRestaurantAddressUseCase(restaurantAddressRepository);
+    sut = new CreateRestaurantAddressUseCase(restaurantAddressRepository, restaurantsRepository);
   });
 
   it("should be able to create restaurant address", async () => {
@@ -70,5 +71,20 @@ describe("Create Restaurant Address Use Case", () => {
         zip_code: "2123"
       })
     ).rejects.toBeInstanceOf(RestaurantAddressAlreadyExistsError);
+  });
+
+  it("shouldn't be able to create restaurant address if restaurant not exists", async () => {
+
+    await expect(() => 
+      sut.execute({
+        restaurant_id: "123129dsi9ds2",
+        city: "São Paulo",
+        state: "SP",
+        street: "Rua tal",
+        district: "Algum outro bairro aí",
+        number: 20,
+        zip_code: "2123"
+      })
+    ).rejects.toBeInstanceOf(RestaurantNotFoundError);
   });
 });
