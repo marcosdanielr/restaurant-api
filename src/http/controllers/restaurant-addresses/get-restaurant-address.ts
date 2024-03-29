@@ -23,7 +23,9 @@ export async function getRestaurantAddress(request: FastifyRequest, reply: Fasti
     return reply.status(StatusCodes.OK).send(restaurantAddress);
   } catch (error) {
     if (error instanceof RestaurantNotFoundError) {
-      return reply.status(StatusCodes.NOT_FOUND).send(error.message);
+      return reply.status(StatusCodes.NOT_FOUND).send({
+        message: error.message
+      });
     }
 
     return reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
