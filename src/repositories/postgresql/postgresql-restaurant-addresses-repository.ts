@@ -20,7 +20,16 @@ export class PostgreSQLRestaurantAddressesRepository implements IRestaurantAddre
     );
   }
 
-  async getByRestaurantId(restaurantId: string) {
-    return null; 
+  async getByRestaurantId(restaurant_id_req: string) {
+    const restaurant_id = restaurant_id_req;
+
+    const { rows } = await app.pg.query(
+      "SELECT * FROM restaurant_addresses WHERE restaurant_id = $1 LIMIT 1",
+      [restaurant_id]
+    );
+
+    const [ restaurantAddress ] = rows;
+
+    return restaurantAddress || null; 
   }
 }
