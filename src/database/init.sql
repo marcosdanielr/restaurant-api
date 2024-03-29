@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS "restaurants" (
 
 CREATE TABLE IF NOT EXISTS "restaurant_addresses" (
   "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
-  "restaurant_id" uuid NOT NULL,
+  "restaurant_id" uuid UNIQUE NOT NULL,
   "city" VARCHAR(28) NOT NULL,
   "state" VARCHAR(2) NOT NULL,
   "street" VARCHAR(50) NOT NULL,
