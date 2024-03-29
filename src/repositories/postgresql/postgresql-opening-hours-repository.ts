@@ -16,7 +16,14 @@ export class PostgreSQLOpeningHoursRepository implements IOpeningHoursRepository
   }
 
   async list(restaurant_id_req: string) {
-    return []; 
+    const restaurant_id = restaurant_id_req;
+  
+    const { rows: opening_hours } = await app.pg.query(
+      "SELECT * FROM opening_hours WHERE restaurant_id = $1",
+      [restaurant_id]
+    );
+
+    return opening_hours;
   }
 
   async getByWeekday(restaurant_id_req: string, weekday_req: Weekday) {
@@ -32,5 +39,4 @@ export class PostgreSQLOpeningHoursRepository implements IOpeningHoursRepository
 
     return opening_hour || null;
   }
-
 }
