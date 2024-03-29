@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS "opening_hours" (
   "created_at" TIMESTAMP DEFAULT NOW() NOT NULL,
   "updated_at" TIMESTAMP DEFAULT NOW() NOT NULL,
   CONSTRAINT pk_opening_hours PRIMARY KEY (id),
+  CONSTRAINT uc_restaurant_weekday UNIQUE (restaurant_id, weekday), 
   CONSTRAINT fk_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );
 
