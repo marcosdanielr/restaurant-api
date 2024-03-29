@@ -1,10 +1,10 @@
 import { IOpeningHoursRepository } from "@/repositories/opening-hours-repository";
-import { OpeningHours as OpeningHoursRequest } from "@/models/opening-hours-model";
 import { InvalidWeekdayError } from "../errors/invalid-weekday-error";
 import { WeekdaysEnum } from "@/constants/weekdays-enum";
 import { WeekdayAlreadyExistsError } from "../errors/weekday-already-exists-error";
 import { validateTimeFormat } from "@/utils/validate-hour-format";
 import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
+import { CreateOpeningHoursRequest } from "@/models/opening-hours-model";
 
 import { MinimumIntervalTimeError } from "../errors/minimum-interval-time-error";
 import { MINIMUM_INTERVAL_TIME_IN_SECONDS } from "@/constants/minimum-interval-time-in-seconds";
@@ -18,7 +18,7 @@ export class CreateOpeningHoursUseCase {
     weekday,
     start_time,
     end_time,
-  }: OpeningHoursRequest): Promise<void> {
+  }: CreateOpeningHoursRequest): Promise<void> {
 
     const isNotValidHour = !validateTimeFormat(start_time) || !validateTimeFormat(end_time);
     
