@@ -1,8 +1,8 @@
 import { CreateRestaurantAddressRequest, RestaurantAddress } from "@/models/restaurant-addresses-model";
-import { IRestaurantAddressRepository } from "../restaurant-addresses-repository";
+import { IRestaurantAddressesRepository } from "../restaurant-addresses-repository";
 import { randomUUID } from "crypto";
 
-export class InMemoryRestaurantAddressesRepository implements IRestaurantAddressRepository {
+export class InMemoryRestaurantAddressesRepository implements IRestaurantAddressesRepository {
   public restaurantsAdresses: RestaurantAddress[] = []; 
 
   async create(body: CreateRestaurantAddressRequest) {
