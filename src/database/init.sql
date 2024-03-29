@@ -37,8 +37,8 @@ CREATE TABLE IF NOT EXISTS "opening_hours" (
   "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
   "restaurant_id" uuid NOT NULL,
   "weekday" "weekday_type" NOT NULL,
-  "start_time" TIME,
-  "end_time" TIME,
+  "start_time" TIME NOT NULL,
+  "end_time" TIME NOT NULL,
   "created_at" TIMESTAMP DEFAULT NOW() NOT NULL,
   "updated_at" TIMESTAMP DEFAULT NOW() NOT NULL,
   CONSTRAINT pk_opening_hours PRIMARY KEY (id),
@@ -62,10 +62,22 @@ CREATE TABLE IF NOT EXISTS "products" (
   "category_id" uuid NOT NULL,
   "name" VARCHAR(255) NOT NULL,
   "image_path" VARCHAR(255),
-  "price" DECIMAL NOT NULL,
+  "price" DECIMAL(10, 2) NOT NULL,
   "created_at" TIMESTAMP DEFAULT NOW() NOT NULL,
   "updated_at" TIMESTAMP DEFAULT NOW() NOT NULL,
   CONSTRAINT pk_products PRIMARY KEY (id),
   CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE,
   CONSTRAINT fk_category_id FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS "promotions" (
+  "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
+  "product_id" uuid NOT NULL,
+  "description" TEXT,
+  "price" DECIMAL(10, 2) NOT NULL,
+  "start_time" TIMESTAMP NOT NULL,
+  "end_time" TIMESTAMP NOT NULL,
+  "created_at" TIMESTAMP DEFAULT NOW() NOT NULL,
+  CONSTRAINT pk_promotions PRIMARY KEY (id),
+  CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
