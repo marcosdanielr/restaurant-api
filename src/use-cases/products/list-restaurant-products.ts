@@ -25,7 +25,7 @@ export class ListRestaurantProductsUseCase {
       throw new RestaurantNotFoundError();
     }
 
-    const products = await this.productsRepository.listRestaurantProducts(restaurant_id);
+    const products = await this.productsRepository.listByRestaurantId(restaurant_id);
 
     return {
       products

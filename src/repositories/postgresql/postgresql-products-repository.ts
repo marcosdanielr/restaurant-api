@@ -22,7 +22,7 @@ export class PostgreSQLProductsRepository implements IProductsRepository {
       
   }
 
-  async listRestaurantProducts(restaurant_id: string) {
+  async listByRestaurantId(restaurant_id: string) {
     return []; 
   }
 
