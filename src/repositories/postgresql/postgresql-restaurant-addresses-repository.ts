@@ -15,7 +15,7 @@ export class PostgreSQLRestaurantAddressesRepository implements IRestaurantAddre
     } = body;
 
     await app.pg.query(
-      "INSERT INTO restaurant_addresses (restaurant_id, city, state, street, district, number) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+      "INSERT INTO restaurant_addresses (restaurant_id, city, state, street, district, number) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
       [restaurant_id, city, state, street, district, number]
     );
   }
