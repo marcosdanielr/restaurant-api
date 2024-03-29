@@ -3,6 +3,7 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { CreateProductUseCase } from "./create-product";
 import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { InMemoryCategoriesRepository } from "@/repositories/in-memory/in-memory-categories-repository";
+import { RestaurantNotFoundError } from "../errors/restaurant-not-found-error";
 
 let productsRepository: InMemoryProductsRepository;
 let restaurantsRepository: InMemoryRestaurantsRepository;
@@ -15,7 +16,7 @@ describe("Create Product Use Case", () => {
     restaurantsRepository = new InMemoryRestaurantsRepository();
     categoriesRepository = new InMemoryCategoriesRepository();
 
-    sut = new CreateProductUseCase(productsRepository);
+    sut = new CreateProductUseCase(productsRepository, restaurantsRepository);
   });
 
   it("should be able to create product", async () => {
@@ -47,5 +48,29 @@ describe("Create Product Use Case", () => {
         id: expect.any(String),
       }),
     );
+  });
+
+  it("should not be able to create product if restaurant not exists", async () => {
+    await restaurantsRepository.create({
+      name: "Lanchonete",
+    });
+
+    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
+
+    await categoriesRepository.create(restaurant_id, {
+      name: "Bebidas",
+    });
+
+    const { id: category_id } = categoriesRepository.categories[0];
+
+    await expect(() => sut.execute({
+      restaurant_id: "3230dsdas",
+      body: {
+        name: "Monster",
+        category_id,
+        price: 9.5,
+      },
+    }))
+      .rejects.toBeInstanceOf(RestaurantNotFoundError);
   });
 });
