@@ -27,7 +27,7 @@ describe("Get Restaurant Address Use Case", () => {
       state: "SP",
       street: "Rua tal",
       district: "Algum bairro aí",
-      number: 231,
+      number: "231",
       zip_code: "21223"
     });
 
@@ -37,7 +37,7 @@ describe("Get Restaurant Address Use Case", () => {
       state: "SP",
       street: "Rua tal",
       district: "Algum bairro aí",
-      number: 231,
+      number: "231",
       zip_code: "21223"
     });
 

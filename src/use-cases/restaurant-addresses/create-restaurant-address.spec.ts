@@ -29,7 +29,7 @@ describe("Create Restaurant Address Use Case", () => {
       state: "SP",
       street: "Rua tal",
       district: "Algum bairro aí",
-      number: 231,
+      number: "231",
       zip_code: "21223"
     });
 
@@ -56,7 +56,7 @@ describe("Create Restaurant Address Use Case", () => {
       state: "SP",
       street: "Rua tal",
       district: "Algum bairro aí",
-      number: 231,
+      number: "231",
       zip_code: "21223"
     });
 
@@ -67,7 +67,7 @@ describe("Create Restaurant Address Use Case", () => {
         state: "SP",
         street: "Rua tal",
         district: "Algum outro bairro aí",
-        number: 20,
+        number: "20",
         zip_code: "2123"
       })
     ).rejects.toBeInstanceOf(RestaurantAddressAlreadyExistsError);
@@ -82,7 +82,7 @@ describe("Create Restaurant Address Use Case", () => {
         state: "SP",
         street: "Rua tal",
         district: "Algum outro bairro aí",
-        number: 20,
+        number: "20",
         zip_code: "2123"
       })
     ).rejects.toBeInstanceOf(RestaurantNotFoundError);
