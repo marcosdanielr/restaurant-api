@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS "restaurant_addresses" (
   "created_at" TIMESTAMP DEFAULT NOW() NOT NULL,
   "updated_at" TIMESTAMP DEFAULT NOW() NOT NULL,
   CONSTRAINT pk_restaurant_addresses PRIMARY KEY (id),
-  CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES restaurants(id)
+  CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS "categories" (
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS "categories" (
   "created_at" TIMESTAMP DEFAULT NOW() NOT NULL,
   "updated_at" TIMESTAMP DEFAULT NOW() NOT NULL,
   CONSTRAINT pk_categories PRIMARY KEY (id),
-  CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES restaurants(id)
+  CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS "products" (
@@ -43,6 +43,6 @@ CREATE TABLE IF NOT EXISTS "products" (
   "created_at" TIMESTAMP DEFAULT NOW() NOT NULL,
   "updated_at" TIMESTAMP DEFAULT NOW() NOT NULL,
   CONSTRAINT pk_products PRIMARY KEY (id),
-  CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES restaurants(id),
-  CONSTRAINT fk_category_id FOREIGN KEY (category_id) REFERENCES categories(id)
+  CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE,
+  CONSTRAINT fk_category_id FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
 );
