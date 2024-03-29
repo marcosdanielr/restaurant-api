@@ -1,6 +1,6 @@
-import { RestaurantAddress } from "@/models/restaurant-addresses-model";
+import { CreateRestaurantAddressRequest, RestaurantAddress } from "@/models/restaurant-addresses-model";
 
-export interface IRestaurantAddressRepository {
-  create(body: RestaurantAddress): Promise<void>;
+export interface IRestaurantAddressesRepository {
+  create(body: CreateRestaurantAddressRequest): Promise<void>;
   getByRestaurantId(restaurantId: string): Promise<RestaurantAddress | null>;
 }

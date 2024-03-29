@@ -1,9 +1,9 @@
-import { RestaurantAddress } from "@/models/restaurant-addresses-model";
-import { IRestaurantAddressRepository } from "@/repositories/restaurant-address-repository";
+import { CreateRestaurantAddressRequest } from "@/models/restaurant-addresses-model";
 import { RestaurantAddressAlreadyExistsError } from "../errors/restaurant-address-already-exists-error";
+import { IRestaurantAddressesRepository } from "@/repositories/restaurant-addresses-repository";
 
 export class CreateRestaurantAddressUseCase {
-  constructor(private restaurantAdressRepository: IRestaurantAddressRepository) {}
+  constructor(private restaurantAddressesRepository: IRestaurantAddressesRepository) {}
 
   async execute({
     restaurant_id,
@@ -13,15 +13,15 @@ export class CreateRestaurantAddressUseCase {
     district,
     number,
     zip_code
-  }: RestaurantAddress): Promise<void> {
+  }: CreateRestaurantAddressRequest): Promise<void> {
 
-    const restaurantAddressExists = await this.restaurantAdressRepository.getByRestaurantId(restaurant_id);
+    const restaurantAddressExists = await this.restaurantAddressesRepository.getByRestaurantId(restaurant_id);
 
     if (restaurantAddressExists) {
       throw new RestaurantAddressAlreadyExistsError();
     }
 
-    await this.restaurantAdressRepository.create({
+    await this.restaurantAddressesRepository.create({
       restaurant_id,
       city,
       state,

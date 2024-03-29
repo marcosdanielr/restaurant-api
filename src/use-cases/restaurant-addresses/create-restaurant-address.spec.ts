@@ -1,17 +1,17 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { InMemoryRestaurantAddressRepository } from "@/repositories/in-memory/in-memory-restaurant-address-repository";
 import { CreateRestaurantAddressUseCase } from "./create-restaurant-address";
 import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { RestaurantAddressAlreadyExistsError } from "../errors/restaurant-address-already-exists-error";
+import { InMemoryRestaurantAddressesRepository } from "@/repositories/in-memory/in-memory-restaurant-addresses-repository";
 
 let restaurantsRepository: InMemoryRestaurantsRepository;
-let restaurantAddressRepository: InMemoryRestaurantAddressRepository;
+let restaurantAddressRepository: InMemoryRestaurantAddressesRepository;
 let sut: CreateRestaurantAddressUseCase;
 
 describe("Create Restaurant Address Use Case", () => {
   beforeEach(() => {
     restaurantsRepository = new InMemoryRestaurantsRepository();
-    restaurantAddressRepository = new InMemoryRestaurantAddressRepository();
+    restaurantAddressRepository = new InMemoryRestaurantAddressesRepository;
     sut = new CreateRestaurantAddressUseCase(restaurantAddressRepository);
   });
 
@@ -21,7 +21,6 @@ describe("Create Restaurant Address Use Case", () => {
     });
 
     const { id: restaurant_id } = restaurantsRepository.restaurants[0];
-
 
     await sut.execute({
       restaurant_id,
@@ -36,6 +35,10 @@ describe("Create Restaurant Address Use Case", () => {
     const restaurantAddress = restaurantAddressRepository.restaurantsAdresses;
 
     expect(restaurantAddress.length).toEqual(1);
+    expect(restaurantAddress[0]).toEqual(expect.objectContaining({
+      id: expect.any(String), 
+      created_at: expect.any(Date), 
+    }));
   });
 
 
