@@ -9,8 +9,8 @@ export class PostgreSQLProductsRepository implements IProductsRepository {
     const { name, image_path, price, category_id } = body;
 
     await app.pg.query(
-      "INSERT INTO products (name, image_path, price, restaurant_id) VALUES ($1, $2, $3, $4) RETURNING *",
-      [name, image_path, price, restaurant_id]
+      "INSERT INTO products (name, image_path, price, restaurant_id, category_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [name, image_path, price, restaurant_id, category_id]
     );
   }
 
