@@ -30,7 +30,6 @@ describe("Create Restaurant Address Use Case", () => {
       street: "Rua tal",
       district: "Algum bairro aí",
       number: "231",
-      zip_code: "21223"
     });
 
     const restaurantAddress = restaurantAddressRepository.restaurantsAdresses;
@@ -57,7 +56,6 @@ describe("Create Restaurant Address Use Case", () => {
       street: "Rua tal",
       district: "Algum bairro aí",
       number: "231",
-      zip_code: "21223"
     });
 
     await expect(() => 
@@ -68,7 +66,6 @@ describe("Create Restaurant Address Use Case", () => {
         street: "Rua tal",
         district: "Algum outro bairro aí",
         number: "20",
-        zip_code: "2123"
       })
     ).rejects.toBeInstanceOf(RestaurantAddressAlreadyExistsError);
   });
@@ -83,7 +80,6 @@ describe("Create Restaurant Address Use Case", () => {
         street: "Rua tal",
         district: "Algum outro bairro aí",
         number: "20",
-        zip_code: "2123"
       })
     ).rejects.toBeInstanceOf(RestaurantNotFoundError);
   });

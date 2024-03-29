@@ -9,7 +9,6 @@ export async function createRestaurantAddress(request: FastifyRequest, reply: Fa
     restaurant_id: z.string().uuid(),
     city: z.string(),
     state: z.string().length(2),
-    zip_code: z.string(),
     district: z.string(),
     street: z.string(),
     number: z.string()
@@ -19,7 +18,6 @@ export async function createRestaurantAddress(request: FastifyRequest, reply: Fa
     restaurant_id,
     city,
     state,
-    zip_code,
     district,
     street,
     number
@@ -32,7 +30,6 @@ export async function createRestaurantAddress(request: FastifyRequest, reply: Fa
       restaurant_id,
       city,
       state,
-      zip_code,
       district,
       street,
       number      

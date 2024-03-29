@@ -28,7 +28,6 @@ describe("Get Restaurant Address Use Case", () => {
       street: "Rua tal",
       district: "Algum bairro aí",
       number: "231",
-      zip_code: "21223"
     });
 
     await restaurantAddressRepository.create({
@@ -38,7 +37,6 @@ describe("Get Restaurant Address Use Case", () => {
       street: "Rua tal",
       district: "Algum bairro aí",
       number: "231",
-      zip_code: "21223"
     });
 
     const { restaurantAddress } = await sut.execute({ restaurant_id });

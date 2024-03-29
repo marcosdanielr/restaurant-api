@@ -11,7 +11,6 @@ export async function restaurantAddressesRoutes(app: FastifyInstance) {
           restaurant_id: { type: "string" },
           city: { type: "string" },
           state: { type: "string" },
-          zip_code: { type: "string" },
           district: { type: "string" },
           street: { type: "string" },
           number: { type: "string" }

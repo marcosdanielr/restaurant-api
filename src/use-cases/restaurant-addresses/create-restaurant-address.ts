@@ -17,7 +17,6 @@ export class CreateRestaurantAddressUseCase {
     street,
     district,
     number,
-    zip_code
   }: CreateRestaurantAddressRequest): Promise<void> {
 
     const restaurantExists = await this.restaurantRepository.getById(restaurant_id);
@@ -39,7 +38,6 @@ export class CreateRestaurantAddressUseCase {
       street,
       district,
       number,
-      zip_code
     });
   }
 }

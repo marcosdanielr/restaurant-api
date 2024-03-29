@@ -9,15 +9,14 @@ export class PostgreSQLRestaurantAddressesRepository implements IRestaurantAddre
       restaurant_id,
       city,
       state,
-      zip_code,
       street,
       district,
       number
     } = body;
 
     await app.pg.query(
-      "INSERT INTO restaurant_addresses (restaurant_id, city, state, zip_code, street, district, number) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-      [restaurant_id, city, state, zip_code, street, district, number]
+      "INSERT INTO restaurant_addresses (restaurant_id, city, state, street, district, number) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+      [restaurant_id, city, state, street, district, number]
     );
   }
 
