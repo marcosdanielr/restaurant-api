@@ -43,11 +43,18 @@ export async function createOpeningHour(request: FastifyRequest, reply: FastifyR
       });
     }
 
-    if (error instanceof InvalidTimeFormatError || error instanceof MinimumIntervalTimeError || error instanceof WeekdayAlreadyExistsError) {
+    if (error instanceof InvalidTimeFormatError || error instanceof MinimumIntervalTimeError) {
       return reply.status(StatusCodes.BAD_REQUEST).send({
         message: error.message
       });
     }
+
+    if (error instanceof WeekdayAlreadyExistsError) {
+      return reply.status(StatusCodes.CONFLICT).send({
+        message: error.message
+      });
+    }
+
     return reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
   }
 }
