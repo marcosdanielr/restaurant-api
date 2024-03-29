@@ -1,5 +1,5 @@
 import { RestaurantAddress } from "@/models/restaurant-addresses-model";
-import { IRestaurantAddressRepository } from "../restaurant-address-repository";
+import { IRestaurantAddressRepository } from "../restaurant-addresses-repository";
 
 export class InMemoryRestaurantAddressRepository implements IRestaurantAddressRepository {
   public restaurantsAdresses: RestaurantAddress[] = []; 
