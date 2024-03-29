@@ -5,9 +5,9 @@ export type RestaurantAddress = {
   state: string;
   street: string;
   district: string;
-  number: number;
-  zip_code: string;
+  number: string;
   created_at: Date;
+  updated_at: Date;
 }
 
 
@@ -17,6 +17,5 @@ export type CreateRestaurantAddressRequest = {
   state: string;
   street: string;
   district: string;
-  number: number;
-  zip_code: string;
+  number: string;
 }

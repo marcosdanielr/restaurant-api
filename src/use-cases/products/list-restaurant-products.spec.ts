@@ -3,6 +3,7 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { InMemoryCategoriesRepository } from "@/repositories/in-memory/in-memory-categories-repository";
 import { ListRestaurantProductsUseCase } from "./list-restaurant-products";
+import { RestaurantNotFoundError } from "../errors/restaurant-not-found-error";
 
 let productsRepository: InMemoryProductsRepository;
 let restaurantsRepository: InMemoryRestaurantsRepository;
@@ -15,7 +16,7 @@ describe("List Restaurant Products Use Case", () => {
     restaurantsRepository = new InMemoryRestaurantsRepository();
     categoriesRepository = new InMemoryCategoriesRepository();
 
-    sut = new ListRestaurantProductsUseCase(productsRepository);
+    sut = new ListRestaurantProductsUseCase(productsRepository, restaurantsRepository);
   });
 
   it("should be able to list products by restaurant id", async () => {
@@ -71,5 +72,14 @@ describe("List Restaurant Products Use Case", () => {
         })
       ])
     );
+  });
+
+
+  it("shouldn't be able to list products if restaurant not exists", async () => {
+    await expect(() => 
+      sut.execute({
+        restaurant_id: "asdasd23213"
+      })
+    ).rejects.toBeInstanceOf(RestaurantNotFoundError);
   });
 });

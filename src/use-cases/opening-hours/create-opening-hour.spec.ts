@@ -1,21 +1,20 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { CreateOpeningHoursUseCase } from "./create-opening-hours";
 import { InMemoryOpeningHoursRepository } from "@/repositories/in-memory/in-memory-opening-hours-repository";
 import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
-import { InvalidWeekdayError } from "../errors/invalid-weekday-error";
 import { WeekdayAlreadyExistsError } from "../errors/weekday-already-exists-error";
 import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
 import { MinimumIntervalTimeError } from "../errors/minimum-interval-time-error";
+import { CreateOpeningHourUseCase } from "./create-opening-hour";
 
 let restaurantsRepository: InMemoryRestaurantsRepository;
 let openingHoursRepository: InMemoryOpeningHoursRepository;
-let sut: CreateOpeningHoursUseCase;
+let sut: CreateOpeningHourUseCase;
 
-describe("Create Opening Hours Use Case", () => {
+describe("Create Opening Hour Use Case", () => {
   beforeEach(() => {
     restaurantsRepository = new InMemoryRestaurantsRepository();
     openingHoursRepository = new InMemoryOpeningHoursRepository();
-    sut = new CreateOpeningHoursUseCase(openingHoursRepository);
+    sut = new CreateOpeningHourUseCase(openingHoursRepository, restaurantsRepository);
   });
 
   it("should be able to create opening hour", async () => {
@@ -28,7 +27,7 @@ describe("Create Opening Hours Use Case", () => {
 
     await sut.execute({
       restaurant_id,
-      weekday: "SUNDAY",
+      weekday: "sunday",
       start_time: "08:10",
       end_time: "18:00"
     });
@@ -38,32 +37,14 @@ describe("Create Opening Hours Use Case", () => {
     expect(openingHours[0]).toEqual(
       expect.objectContaining({
         restaurant_id,
-        weekday: "SUNDAY",
+        weekday: "sunday",
         start_time: "08:10",
         end_time: "18:00"
       })
     );
   });
 
-  it("shouldn't able to create opening hours if has invalid weekday", async () => {
-    await restaurantsRepository.create({
-      name: "Lanchonete",
-    });
-
-    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
-
-    await expect(() => 
-      sut.execute({
-        restaurant_id,
-        weekday: "TEST" as any,
-        start_time: "08:10",
-        end_time: "18:00"
-      })
-    ).rejects.toBeInstanceOf(InvalidWeekdayError);
-  });
-
-
-  it("shouldn't able to create opening hours if already exists", async () => {
+  it("shouldn't able to create opening hour if already exists", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
     });
@@ -72,7 +53,7 @@ describe("Create Opening Hours Use Case", () => {
 
     await sut.execute({
       restaurant_id,
-      weekday: "SUNDAY",
+      weekday: "sunday",
       start_time: "05:10",
       end_time: "16:00"
     });
@@ -80,7 +61,7 @@ describe("Create Opening Hours Use Case", () => {
     await expect(() => 
       sut.execute({
         restaurant_id,
-        weekday: "SUNDAY",
+        weekday: "sunday",
         start_time: "08:10",
         end_time: "18:00"
       })
@@ -88,7 +69,7 @@ describe("Create Opening Hours Use Case", () => {
   });
 
 
-  it("shouldn't able to create opening hours if time format be different than HH:mm", async () => {
+  it("shouldn't able to create opening hour if time format be different than HH:mm", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
     });
@@ -98,7 +79,7 @@ describe("Create Opening Hours Use Case", () => {
     await expect(() => 
       sut.execute({
         restaurant_id,
-        weekday: "SUNDAY",
+        weekday: "sunday",
         start_time: "11:10",
         end_time: "18h00"
       })
@@ -116,7 +97,7 @@ describe("Create Opening Hours Use Case", () => {
     await expect(() => 
       sut.execute({
         restaurant_id,
-        weekday: "SUNDAY",
+        weekday: "sunday",
         start_time: "11:15",
         end_time: "11:29" 
       })

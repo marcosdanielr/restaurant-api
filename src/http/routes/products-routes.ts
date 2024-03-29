@@ -1,5 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { createProduct } from "../controllers/products/create-product";
+import { listRestaurantProducts } from "../controllers/products/list-restaurant-products";
 
 export async function productsRoutes(app: FastifyInstance) {
 
@@ -17,7 +18,12 @@ export async function productsRoutes(app: FastifyInstance) {
         }
       }
     }
-  },
-  createProduct
-  );
+  }, createProduct);
+
+
+  app.get("/products/:restaurant_id", {
+    schema: {
+      tags: ["Products"],
+    }
+  }, listRestaurantProducts);
 }

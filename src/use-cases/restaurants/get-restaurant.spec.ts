@@ -34,7 +34,7 @@ describe("Get Restaurant Use Case", () => {
   });
 
   it("should not be able to get restaurant by id", async () => {
-    expect(async () =>   await sut.execute({
+    await expect(() => sut.execute({
       id: "321sdudsjh221" 
     }))
       .rejects.toBeInstanceOf(RestaurantNotFoundError);

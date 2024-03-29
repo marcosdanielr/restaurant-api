@@ -6,7 +6,7 @@ export class InMemoryRestaurantAddressesRepository implements IRestaurantAddress
   public restaurantsAdresses: RestaurantAddress[] = []; 
 
   async create(body: CreateRestaurantAddressRequest) {
-    const { restaurant_id, city, state, street, district, number, zip_code } = body;
+    const { restaurant_id, city, state, street, district, number } = body;
 
     const restaurantAddress: RestaurantAddress = {
       id: randomUUID(),
@@ -16,8 +16,8 @@ export class InMemoryRestaurantAddressesRepository implements IRestaurantAddress
       street,
       district,
       number,
-      zip_code,
-      created_at: new Date()
+      created_at: new Date(),
+      updated_at: new Date()
     };
 
     this.restaurantsAdresses.push(restaurantAddress);

@@ -21,7 +21,7 @@ export class CreatePromotionUseCase {
     end_time
   }: CreatePromotionRequest): Promise<void> {
 
-    const isValidWeekDay = WeekdaysEnum[weekday];
+    const isValidWeekDay = weekday.toUpperCase() in WeekdaysEnum;
 
     if (!isValidWeekDay) {
       throw new InvalidWeekdayError();

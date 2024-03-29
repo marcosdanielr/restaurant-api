@@ -49,7 +49,7 @@ describe("Create Promotion Use Case", () => {
       product_id, 
       price: 7.50,
       description: "Promoção!",
-      weekday: "SUNDAY",
+      weekday: "sunday",
       start_time: "08:10",
       end_time: "18:00"
     });
@@ -62,7 +62,7 @@ describe("Create Promotion Use Case", () => {
         product_id, 
         price: 7.50,
         description: "Promoção!",
-        weekday: "SUNDAY",
+        weekday: "sunday",
         start_time: "08:10",
         end_time: "18:00",
         created_at: expect.any(Date)
@@ -128,7 +128,7 @@ describe("Create Promotion Use Case", () => {
       product_id, 
       price: 7.50,
       description: "Promoção!",
-      weekday: "SUNDAY",
+      weekday: "sunday",
       start_time: "08:10",
       end_time: "18:00"
     });
@@ -138,14 +138,14 @@ describe("Create Promotion Use Case", () => {
         product_id, 
         price: 7.50,
         description: "Promoção!",
-        weekday: "SUNDAY",
+        weekday: "sunday",
         start_time: "08:10",
         end_time: "18:00"
       })
     ).rejects.toBeInstanceOf(PromotionAlreadyExistsError);
   });
 
-  it("shouldn't able to create opening hours if time format be different than HH:mm", async () => {
+  it("shouldn't able to create opening hour if time format be different than HH:mm", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
     });
@@ -171,7 +171,7 @@ describe("Create Promotion Use Case", () => {
         product_id, 
         price: 7.50,
         description: "Promoção!",
-        weekday: "SUNDAY",
+        weekday: "sunday",
         start_time: "08h10",
         end_time: "18:00"
       })
