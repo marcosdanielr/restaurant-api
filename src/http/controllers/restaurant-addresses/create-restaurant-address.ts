@@ -8,7 +8,7 @@ export async function createRestaurantAddress(request: FastifyRequest, reply: Fa
   const createRestaurantBodySchema = z.object({
     restaurant_id: z.string().uuid(),
     city: z.string(),
-    state: z.string(),
+    state: z.string().length(2),
     zip_code: z.string(),
     district: z.string(),
     street: z.string(),
