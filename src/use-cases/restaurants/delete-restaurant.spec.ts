@@ -1,6 +1,7 @@
 import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { describe, it, expect, beforeEach } from "vitest";
 import { DeleteRestaurantUseCase } from "./delete-restaurant";
+import { RestaurantNotFoundError } from "../errors/restaurant-not-found-error";
 
 let restaurantsRepository: InMemoryRestaurantsRepository;
 let sut: DeleteRestaurantUseCase;
@@ -29,5 +30,14 @@ describe("Delete Restaurant Use Case", () => {
 
     expect(restaurant).toEqual(null);
     expect(restaurantsRepository.restaurants.length).toEqual(4);
+  });
+
+
+  it("should not be able to delete restaurant if not exists", async () => {
+    await expect(() => 
+      sut.execute({
+        id: "1233290dsd"
+      }))
+      .rejects.toBeInstanceOf(RestaurantNotFoundError);
   });
 });
