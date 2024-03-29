@@ -77,7 +77,7 @@ describe("Get Restaurant Address Use Case", () => {
     });
 
     await expect(() => 
-      sut.execute({ restaurant_id })
+      sut.execute({ restaurant_id: "23sdd" })
     ).rejects.toBeInstanceOf(RestaurantNotFoundError);
 
   });
