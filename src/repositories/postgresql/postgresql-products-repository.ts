@@ -33,4 +33,18 @@ export class PostgreSQLProductsRepository implements IProductsRepository {
 
     return products; 
   }
+
+  async getById(id_req: string) {
+    const id = id_req;
+
+    const { rows } = await app.pg.query(
+      "SELECT * FROM products WHERE id = $1 LIMIT 1",
+      [id]
+    );
+
+    const [product] = rows;
+
+    return product || null; 
+      
+  }
 }
