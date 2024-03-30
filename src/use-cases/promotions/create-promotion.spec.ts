@@ -146,7 +146,7 @@ describe("Create Promotion Use Case", () => {
     ).rejects.toBeInstanceOf(PromotionAlreadyExistsError);
   });
 
-  it("shouldn't able to create opening hour if time format be different than HH:mm", async () => {
+  it("shouldn't able to create promotion if time format be different than HH:mm", async () => {
     await restaurantsRepository.create({
       name: "Lanchonete",
     });
