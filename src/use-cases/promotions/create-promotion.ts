@@ -38,12 +38,6 @@ export class CreatePromotionUseCase {
       throw new InvalidTimeFormatError();
     } 
 
-    const promotionExists = await this.promotionsRepository.getByWeekday(product_id, weekday);
-
-    if (promotionExists) {
-      throw new PromotionAlreadyExistsError();
-    }
-
     if (!isMinimumIntervalInMinutes(
       start_time, 
       end_time, 
@@ -56,6 +50,12 @@ export class CreatePromotionUseCase {
 
     if (!productExists) {
       throw new ProductNotFoundError();
+    }
+
+    const promotionExists = await this.promotionsRepository.getByWeekday(product_id, weekday);
+
+    if (promotionExists) {
+      throw new PromotionAlreadyExistsError();
     }
 
     await this.promotionsRepository.create({
