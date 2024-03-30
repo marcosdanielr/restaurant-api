@@ -8,9 +8,14 @@ import { validateTimeFormat } from "@/utils/validate-hour-format";
 import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
 import { WeekdaysEnum } from "@/constants/weekdays-enum";
 import { InvalidWeekdayError } from "../errors/invalid-weekday-error";
+import { IProductsRepository } from "@/repositories/products-repository";
+import { ProductNotFoundError } from "../errors/product-not-found-error";
 
 export class CreatePromotionUseCase {
-  constructor(private promotionsRepository: IPromotionsRepository) {}
+  constructor(
+    private promotionsRepository: IPromotionsRepository,
+    private productsRepository: IProductsRepository
+  ) {}
 
   async execute({
     product_id,
@@ -45,6 +50,12 @@ export class CreatePromotionUseCase {
       MINIMUM_INTERVAL_TIME_IN_SECONDS
     )) {
       throw new MinimumIntervalTimeError(MINIMUM_INTERVAL_TIME_IN_SECONDS);
+    }
+
+    const productExists = await this.productsRepository.getById(product_id);
+
+    if (!productExists) {
+      throw new ProductNotFoundError();
     }
 
     await this.promotionsRepository.create({
