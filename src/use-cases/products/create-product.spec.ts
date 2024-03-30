@@ -4,6 +4,7 @@ import { CreateProductUseCase } from "./create-product";
 import { InMemoryRestaurantsRepository } from "@/repositories/in-memory/in-memory-restaurants-repository";
 import { InMemoryCategoriesRepository } from "@/repositories/in-memory/in-memory-categories-repository";
 import { RestaurantNotFoundError } from "../errors/restaurant-not-found-error";
+import { CategoryNotFoundError } from "../errors/category-not-found-error";
 
 let productsRepository: InMemoryProductsRepository;
 let restaurantsRepository: InMemoryRestaurantsRepository;
@@ -16,7 +17,7 @@ describe("Create Product Use Case", () => {
     restaurantsRepository = new InMemoryRestaurantsRepository();
     categoriesRepository = new InMemoryCategoriesRepository();
 
-    sut = new CreateProductUseCase(productsRepository, restaurantsRepository);
+    sut = new CreateProductUseCase(productsRepository, restaurantsRepository, categoriesRepository);
   });
 
   it("should be able to create product", async () => {
@@ -73,4 +74,25 @@ describe("Create Product Use Case", () => {
     }))
       .rejects.toBeInstanceOf(RestaurantNotFoundError);
   });
+
+  it("shouldn't be able to create product if category not exists", async () => {
+    await restaurantsRepository.create({
+      name: "Lanchonete",
+    });
+
+    const { id: restaurant_id } = restaurantsRepository.restaurants[0];
+
+    await expect(() =>     
+      sut.execute({
+        restaurant_id,
+        body: {
+          name: "Monster",
+          category_id: "3434dsffff",
+          price: 9.5,
+        },
+      }))
+      .rejects.toBeInstanceOf(CategoryNotFoundError);
+
+  });
+
 });
