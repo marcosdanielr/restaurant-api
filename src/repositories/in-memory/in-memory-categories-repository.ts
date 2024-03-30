@@ -2,7 +2,7 @@ import { Category, CategoryRequest } from "@/models/categories-model";
 import { ICategoriesRepository } from "../categories-repository";
 import { randomUUID } from "crypto";
 
-export class InMemoryCategoriesRepository  implements ICategoriesRepository {
+export class InMemoryCategoriesRepository implements ICategoriesRepository {
   public categories: Category[] = []; 
 
   async create(restaurant_id: string, body: CategoryRequest) {
@@ -22,5 +22,11 @@ export class InMemoryCategoriesRepository  implements ICategoriesRepository {
     const categories = this.categories.filter(category => category.restaurant_id === restaurant_id);
 
     return categories;          
+  }
+
+  async getById(id: string) {
+    const category = this.categories.find(category => category.id === id) || null;
+
+    return category;
   }
 }
