@@ -5,6 +5,7 @@ import { productsRoutes } from "./products-routes";
 import { categoriesRoutes } from "./categories-routes";
 import { restaurantAddressesRoutes } from "./restaurant-addresses-routes";
 import { openingHoursRoutes } from "./opening-hours.routes";
+import { promotionsRoutes } from "./promotions-routes";
 
 export async function routes(app: FastifyInstance) {
   restaurantsRoutes(app);
@@ -12,4 +13,5 @@ export async function routes(app: FastifyInstance) {
   openingHoursRoutes(app);
   categoriesRoutes(app);
   productsRoutes(app);
+  promotionsRoutes(app);
 }
