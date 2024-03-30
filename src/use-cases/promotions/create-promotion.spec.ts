@@ -7,6 +7,7 @@ import { InMemoryCategoriesRepository } from "@/repositories/in-memory/in-memory
 import { InvalidTimeFormatError } from "../errors/invalid-time-format-error";
 import { InvalidWeekdayError } from "../errors/invalid-weekday-error";
 import { PromotionAlreadyExistsError } from "../errors/promotion-already-exists-error";
+import { ProductNotFoundError } from "../errors/product-not-found-error";
 
 let restaurantsRepository: InMemoryRestaurantsRepository;
 let categoriesRepository: InMemoryCategoriesRepository;
@@ -20,7 +21,7 @@ describe("Create Promotion Use Case", () => {
     categoriesRepository = new InMemoryCategoriesRepository();
     productsRepository = new InMemoryProductsRepository();
     promotionsRepository = new InMemoryPromotionsRepository();
-    sut = new CreatePromotionUseCase(promotionsRepository);
+    sut = new CreatePromotionUseCase(promotionsRepository, productsRepository);
   });
 
   it("should be able to create promotion", async () => {
@@ -176,5 +177,18 @@ describe("Create Promotion Use Case", () => {
         end_time: "18:00"
       })
     ).rejects.toBeInstanceOf(InvalidTimeFormatError);
+  });
+
+  it("shouldn't able to promotion if product not exists", async () => {
+    await expect(() => 
+      sut.execute({
+        product_id: "32dsdko", 
+        price: 7.50,
+        description: "Promoção!",
+        weekday: "sunday",
+        start_time: "08:10",
+        end_time: "18:00"
+      })
+    ).rejects.toBeInstanceOf(ProductNotFoundError);
   });
 });
