@@ -3,7 +3,6 @@ import { InvalidTimeFormatError } from "@/use-cases/errors/invalid-time-format-e
 import { MinimumIntervalTimeError } from "@/use-cases/errors/minimum-interval-time-error";
 import { ProductNotFoundError } from "@/use-cases/errors/product-not-found-error";
 import { PromotionAlreadyExistsError } from "@/use-cases/errors/promotion-already-exists-error";
-import { RestaurantNotFoundError } from "@/use-cases/errors/restaurant-not-found-error";
 import { makeCreatePromotionUseCase } from "@/use-cases/factories/promotions/make-create-promotion-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
