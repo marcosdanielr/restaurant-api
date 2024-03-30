@@ -75,6 +75,7 @@ CREATE TABLE IF NOT EXISTS "promotions" (
   "product_id" uuid NOT NULL,
   "description" TEXT,
   "price" DECIMAL(10, 2) NOT NULL,
+  "weekday" "weekday_type" NOT NULL,
   "start_time" TIMESTAMP NOT NULL,
   "end_time" TIMESTAMP NOT NULL,
   "created_at" TIMESTAMP DEFAULT NOW() NOT NULL,
