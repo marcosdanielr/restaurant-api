@@ -76,8 +76,8 @@ CREATE TABLE IF NOT EXISTS "promotions" (
   "description" TEXT,
   "price" DECIMAL(10, 2) NOT NULL,
   "weekday" "weekday_type" NOT NULL,
-  "start_time" TIMESTAMP NOT NULL,
-  "end_time" TIMESTAMP NOT NULL,
+  "start_time" TIME NOT NULL,
+  "end_time" TIME NOT NULL,
   "created_at" TIMESTAMP DEFAULT NOW() NOT NULL,
   CONSTRAINT pk_promotions PRIMARY KEY (id),
   CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
