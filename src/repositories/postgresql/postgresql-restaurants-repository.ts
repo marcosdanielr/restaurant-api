@@ -15,7 +15,22 @@ export class PostgreSQLRestaurantsRepository implements IRestaurantsRepository {
 
   async list() {
     const { rows: restaurants } = await app.pg.query(
-      "SELECT * FROM restaurants",
+      `
+    SELECT r.*, 
+      CASE
+        WHEN ra.id IS NOT NULL THEN
+          json_build_object(
+            'city', ra.city,
+            'state', ra.state,
+            'street', ra.street,
+            'district', ra.district,
+            'number', ra.number
+          )
+        ELSE '{}'::json
+      END AS address
+    FROM restaurants r
+    LEFT JOIN restaurant_addresses ra ON r.id = ra.restaurant_id
+    `,
       []
     );
 
