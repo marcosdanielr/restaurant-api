@@ -1,4 +1,4 @@
-import { CreateRestaurantAddressRequest, RestaurantAddress } from "@/models/restaurant-addresses-model";
+import { CreateRestaurantAddressRequest, RestaurantAddress, UpdateRestaurantAddressRequest } from "@/models/restaurant-addresses-model";
 import { IRestaurantAddressesRepository } from "../restaurant-addresses-repository";
 import { randomUUID } from "crypto";
 
@@ -21,6 +21,20 @@ export class InMemoryRestaurantAddressesRepository implements IRestaurantAddress
     };
 
     this.restaurantsAdresses.push(restaurantAddress);
+  }
+
+  async update(restaurant_id: string, body: UpdateRestaurantAddressRequest) {
+    const index = this.restaurantsAdresses.findIndex(restaurantAddress => restaurantAddress.restaurant_id === restaurant_id);
+
+    if (index >= 0) {
+      this.restaurantsAdresses[index] = {
+        ...this.restaurantsAdresses[index],
+        ...body,
+        created_at: this.restaurantsAdresses[index].created_at,
+        updated_at: new Date(),
+      };
+    }
+      
   }
 
   async getByRestaurantId(restaurant_id: string) {
