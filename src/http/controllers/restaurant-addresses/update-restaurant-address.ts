@@ -1,5 +1,6 @@
 import { StatusCodes } from "@/constants/status-codes-enum";
 import { RestaurantAddressAlreadyExistsError } from "@/use-cases/errors/restaurant-address-already-exists-error";
+import { RestaurantAddressNotFoundError } from "@/use-cases/errors/restaurant-address-not-found-error";
 import { RestaurantNotFoundError } from "@/use-cases/errors/restaurant-not-found-error";
 import { makeUpdateRestaurantAddressUseCase } from "@/use-cases/factories/restaurant-addresses/make-update-restaurant-address-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
@@ -45,7 +46,7 @@ export async function updateRestaurantAddress(request: FastifyRequest, reply: Fa
 
     return reply.status(StatusCodes.OK).send();
   } catch (error) {
-    if (error instanceof RestaurantNotFoundError || error instanceof RestaurantAddressAlreadyExistsError) {
+    if (error instanceof RestaurantNotFoundError || error instanceof RestaurantAddressNotFoundError) {
       return reply.status(StatusCodes.NOT_FOUND).send({
         message: error.message 
       });
