@@ -2,6 +2,7 @@ import { RestaurantAddress } from "@/models/restaurant-addresses-model";
 import { IRestaurantAddressesRepository } from "@/repositories/restaurant-addresses-repository";
 import { IRestaurantsRepository } from "@/repositories/restaurants-repository";
 import { RestaurantNotFoundError } from "../errors/restaurant-not-found-error";
+import { RestaurantAddressNotFoundError } from "../errors/restaurant-address-not-found-error";
 
 type GetRestaurantAddressUseCaseRequest = {
   restaurant_id: string
@@ -26,6 +27,10 @@ export class GetRestaurantAddressUseCase {
     }
 
     const restaurantAddress = await this.restaurantAddressesRepository.getByRestaurantId(restaurant_id);
+
+    if (!restaurantAddress) {
+      throw new RestaurantAddressNotFoundError();
+    }
 
     return {
       restaurantAddress

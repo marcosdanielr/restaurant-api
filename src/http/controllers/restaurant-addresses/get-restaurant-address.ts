@@ -1,4 +1,5 @@
 import { StatusCodes } from "@/constants/status-codes-enum";
+import { RestaurantAddressNotFoundError } from "@/use-cases/errors/restaurant-address-not-found-error";
 import { RestaurantNotFoundError } from "@/use-cases/errors/restaurant-not-found-error";
 import { makeGetRestaurantAddressUseCase } from "@/use-cases/factories/restaurant-addresses/make-get-restaurant-address-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
@@ -22,7 +23,7 @@ export async function getRestaurantAddress(request: FastifyRequest, reply: Fasti
 
     return reply.status(StatusCodes.OK).send(restaurantAddress);
   } catch (error) {
-    if (error instanceof RestaurantNotFoundError) {
+    if (error instanceof RestaurantNotFoundError || error instanceof RestaurantAddressNotFoundError) {
       return reply.status(StatusCodes.NOT_FOUND).send({
         message: error.message
       });
