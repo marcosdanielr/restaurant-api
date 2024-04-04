@@ -19,3 +19,11 @@ export type CreateRestaurantAddressRequest = {
   district: string;
   number: string;
 }
+
+export type UpdateRestaurantAddressRequest = {
+  city?: string;
+  state?: string;
+  street?: string;
+  district?: string;
+  number?: string;
+}
